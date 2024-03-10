@@ -15,7 +15,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "https://momolem.github.io/knowledgebase-quarz/",
+    baseUrl: "https://knowledge.vogel.business",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
     theme: {
@@ -67,7 +67,7 @@ const config: QuartzConfig = {
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
-      Plugin.Description(),
+      Plugin.Description(), 
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
