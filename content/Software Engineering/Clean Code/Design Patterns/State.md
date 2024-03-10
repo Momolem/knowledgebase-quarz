@@ -16,7 +16,7 @@ tags:
 ## Problem
 The State pattern is closely related to the concept of a _Finite-State Machine_ .
 
-![[99b27dd49126d782f25e31ae2b28ca8b_MD5.png|99b27dd49126d782f25e31ae2b28ca8b_MD5.png]]
+![99b27dd49126d782f25e31ae2b28ca8b_MD5.png](99b27dd49126d782f25e31ae2b28ca8b_MD5.png)
 
 Finite-State Machine.
 
@@ -28,7 +28,7 @@ You can also apply this approach to objects. Imagine that we have a `Document`�
 -   In `Moderation`, it makes the document public, but only if the current user is an administrator.
 -   In `Published`, it doesn’t do anything at all.
 
-![[a7d9f3ec7159a9a532d61d5f6c3f3f6e_MD5.png|a7d9f3ec7159a9a532d61d5f6c3f3f6e_MD5.png]]
+![a7d9f3ec7159a9a532d61d5f6c3f3f6e_MD5.png](a7d9f3ec7159a9a532d61d5f6c3f3f6e_MD5.png)
 
 Possible states and transitions of a document object.
 
@@ -63,13 +63,13 @@ The State pattern suggests that you create new classes for all possible states o
 
 Instead of implementing all behaviors on its own, the original object, called _context_, stores a reference to one of the state objects that represents its current state, and delegates all the state-related work to that object.
 
-![[0939fbae2a8646a79331a1b58c3ffc6f_MD5.png|0939fbae2a8646a79331a1b58c3ffc6f_MD5.png]]
+![0939fbae2a8646a79331a1b58c3ffc6f_MD5.png](0939fbae2a8646a79331a1b58c3ffc6f_MD5.png)
 
 Document delegates the work to a state object.
 
 To transition the context into another state, replace the active state object with another object that represents that new state. This is possible only if all state classes follow the same interface and the context itself works with these objects through that interface.
 
-This structure may look similar to the [[Strategy|Strategy Pattern]], but there’s one key difference. In the State pattern, the particular states may be aware of each other and initiate transitions from one state to another, whereas strategies almost never know about each other.
+This structure may look similar to the [Strategy Pattern](Strategy.md), but there’s one key difference. In the State pattern, the particular states may be aware of each other and initiate transitions from one state to another, whereas strategies almost never know about each other.
 
 ## Real-World Analogy
 The buttons and switches in your smartphone behave differently depending on the current state of the device:
@@ -79,7 +79,7 @@ The buttons and switches in your smartphone behave differently depending on the 
 -   When the phone’s charge is low, pressing any button shows the charging screen.
 
 ## Structure
-![[b8d5cbb79c66c4f4160728a7bcf322ff_MD5.png|b8d5cbb79c66c4f4160728a7bcf322ff_MD5.png]]
+![b8d5cbb79c66c4f4160728a7bcf322ff_MD5.png](b8d5cbb79c66c4f4160728a7bcf322ff_MD5.png)
 1.  **Context** stores a reference to one of the concrete state objects and delegates to it all state-specific work. The context communicates with the state object via the state interface. The context exposes a setter for passing it a new state object.
 2.  The **State** interface declares the state-specific methods. These methods should make sense for all concrete states because you don’t want some of your states to have useless methods that will never be called.
 3.  **Concrete States** provide their own implementations for the state-specific methods. To avoid duplication of similar code across multiple states, you may provide intermediate abstract classes that encapsulate some common behavior.
@@ -90,7 +90,7 @@ The buttons and switches in your smartphone behave differently depending on the 
 ## Pseudocode
 In this example, the **State** pattern lets the same controls of the media player behave differently, depending on the current playback state.
 
-![[85773ac0ff6905eb0434f349f2735ed5_MD5.png|85773ac0ff6905eb0434f349f2735ed5_MD5.png]]
+![85773ac0ff6905eb0434f349f2735ed5_MD5.png](85773ac0ff6905eb0434f349f2735ed5_MD5.png)
 
 Example of changing object behavior with state objects.
 
@@ -248,10 +248,10 @@ class PlayingState extends State is
 ## Pro and  Cons
 Pros | Cons
 ---| ---
-_[[Single Responsibility Principle|Single Responsibility Principle]]_. Organize the code related to particular states into separate classes. | Applying the pattern can be overkill if a state machine has only a few states or rarely changes. 
-_[[Open Closed Principle|Open Closed Principle]]_. Introduce new states without changing existing state classes or the context. |
+_[Single Responsibility Principle](Single%20Responsibility%20Principle.md)_. Organize the code related to particular states into separate classes. | Applying the pattern can be overkill if a state machine has only a few states or rarely changes. 
+_[Open Closed Principle](Open%20Closed%20Principle.md)_. Introduce new states without changing existing state classes or the context. |
 Simplify the code of the context by eliminating bulky state machine conditionals. |
 
 ## Relations with Other Patterns
-- [[Bridge|Bridge]], [[State|State]], [[Strategy|Strategy]] (and to some degree [[Adapter|Adapter]]) have very similar structures. Indeed, all of these patterns are based on [[composition|composition]], which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
-- State can be considered as an extension of [[Strategy|Strategy]]. Both patterns are based on [[composition|composition]]: they change the behavior of the context by delegating some work to helper objects. [[Strategy|Strategy]] makes these objects completely independent and unaware of each other. However, State doesn’t restrict dependencies between concrete states, letting them alter the state of the context at will.
+- [Bridge](Bridge.md), [State](State.md), [Strategy](Strategy.md) (and to some degree [Adapter](Adapter.md)) have very similar structures. Indeed, all of these patterns are based on [composition](composition.md), which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+- State can be considered as an extension of [Strategy](Strategy.md). Both patterns are based on [composition](composition.md): they change the behavior of the context by delegating some work to helper objects. [Strategy](Strategy.md) makes these objects completely independent and unaware of each other. However, State doesn’t restrict dependencies between concrete states, letting them alter the state of the context at will.
