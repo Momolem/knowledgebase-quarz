@@ -19,7 +19,7 @@ Imagine that you’re creating a stock market monitoring app. The app downloads 
 
 At some point, you decide to improve the app by integrating a smart 3rd-party analytics library. But there’s a catch: the analytics library only works with data in JSON format.
 
-![[14ce68e702b1141c3e2c593ca0179ac4_MD5.png|14ce68e702b1141c3e2c593ca0179ac4_MD5.png]]
+![14ce68e702b1141c3e2c593ca0179ac4_MD5.png](14ce68e702b1141c3e2c593ca0179ac4_MD5.png)
 
 You can’t use the analytics library “as is” because it expects the data in a format that’s incompatible with your app.
 
@@ -39,13 +39,13 @@ Adapters can not only convert data into various formats but can also help object
 
 Sometimes it’s even possible to create a two-way adapter that can convert the calls in both directions.
 
-![[c3bf611c6f74e848cca603de6dcf6dee_MD5.png|c3bf611c6f74e848cca603de6dcf6dee_MD5.png]]
+![c3bf611c6f74e848cca603de6dcf6dee_MD5.png](c3bf611c6f74e848cca603de6dcf6dee_MD5.png)
 
 Let’s get back to our stock market app. To solve the dilemma of incompatible formats, you can create XML-to-JSON adapters for every class of the analytics library that your code works with directly. Then you adjust your code to communicate with the library only via these adapters. When an adapter receives a call, it translates the incoming XML data into a JSON structure and passes the call to the appropriate methods of a wrapped analytics object.
 
 ##  Real-World Analogy
 
-![[4891233b0ce8d55b32b037ec6d11eea0_MD5.png|4891233b0ce8d55b32b037ec6d11eea0_MD5.png]]
+![4891233b0ce8d55b32b037ec6d11eea0_MD5.png](4891233b0ce8d55b32b037ec6d11eea0_MD5.png)
 
 A suitcase before and after a trip abroad.
 
@@ -57,7 +57,7 @@ When you travel from the US to Europe for the first time, you may get a surprise
 
 This implementation uses the object composition principle: the adapter implements the interface of one object and wraps the other one. It can be implemented in all popular programming languages.
 
-![[1c7b8a74cb278de3d25b20491ab63287_MD5.png|1c7b8a74cb278de3d25b20491ab63287_MD5.png]]
+![1c7b8a74cb278de3d25b20491ab63287_MD5.png](1c7b8a74cb278de3d25b20491ab63287_MD5.png)
 
 1.  The **Client** is a class that contains the existing business logic of the program.
     
@@ -74,7 +74,7 @@ This implementation uses the object composition principle: the adapter implement
 
 This implementation uses inheritance: the adapter inherits interfaces from both objects at the same time. Note that this approach can only be implemented in programming languages that support multiple inheritance, such as C++.
 
-![[1aeab52a3ed0a8ee7bf849556eae8811_MD5.png|1aeab52a3ed0a8ee7bf849556eae8811_MD5.png]]
+![1aeab52a3ed0a8ee7bf849556eae8811_MD5.png](1aeab52a3ed0a8ee7bf849556eae8811_MD5.png)
 
 1.  The **Class Adapter** doesn’t need to wrap any objects because it inherits behaviors from both the client and the service. The adaptation happens within the overridden methods. The resulting adapter can be used in place of an existing client class.
     
@@ -83,7 +83,7 @@ This implementation uses inheritance: the adapter inherits interfaces from both 
 
 This example of the **Adapter** pattern is based on the classic conflict between square pegs and round holes.
 
-![[8120e5f767ccd377d9e540a67eeacd81_MD5.png|8120e5f767ccd377d9e540a67eeacd81_MD5.png]]
+![8120e5f767ccd377d9e540a67eeacd81_MD5.png](8120e5f767ccd377d9e540a67eeacd81_MD5.png)
 
 Adapting square pegs to round holes.
 
@@ -152,9 +152,9 @@ hole.fits(large_sqpeg_adapter) // false
 	 The Adapter pattern lets you create a middle-layer class that serves as a translator between your code and a legacy class, a 3rd-party class or any other class with a weird interface.
 
 - **Use the pattern when you want to reuse several existing subclasses that lack some common functionality that can’t be added to the superclass.**
-	 You could extend each subclass and put the missing functionality into new child classes. However, you’ll need to duplicate the code across all of these new classes, which [[Duplicate Code|smells really bad]].
+	 You could extend each subclass and put the missing functionality into new child classes. However, you’ll need to duplicate the code across all of these new classes, which [smells really bad](Duplicate%20Code.md).
 	
-	The much more elegant solution would be to put the missing functionality into an adapter class. Then you would wrap objects with missing features inside the adapter, gaining needed features dynamically. For this to work, the target classes must have a common interface, and the adapter’s field should follow that interface. This approach looks very similar to the [[Decorator|Decorator]] pattern.
+	The much more elegant solution would be to put the missing functionality into an adapter class. Then you would wrap objects with missing features inside the adapter, gaining needed features dynamically. For this to work, the target classes must have a common interface, and the adapter’s field should follow that interface. This approach looks very similar to the [Decorator](Decorator.md) pattern.
 
 ##  How to Implement
 
@@ -170,14 +170,14 @@ hole.fits(large_sqpeg_adapter) // false
 ##  Pros and Cons
 Pros  | Cons
  --- | --- 
-_[[Single Responsibility Principle|Single Responsibility Principle]]_. You can separate the interface or data conversion code from the primary business logic of the program. | The overall complexity of the code increases because you need to introduce a set of new interfaces and classes. Sometimes it’s simpler just to change the service class so that it matches the rest of your code. 
-_[[Open Closed Principle|Open Closed Principle]]_. You can introduce new types of adapters into the program without breaking the existing client code, as long as they work with the adapters through the client interface. |
+_[Single Responsibility Principle](Single%20Responsibility%20Principle.md)_. You can separate the interface or data conversion code from the primary business logic of the program. | The overall complexity of the code increases because you need to introduce a set of new interfaces and classes. Sometimes it’s simpler just to change the service class so that it matches the rest of your code. 
+_[Open Closed Principle](Open%20Closed%20Principle.md)_. You can introduce new types of adapters into the program without breaking the existing client code, as long as they work with the adapters through the client interface. |
 
 -    
 
 ##  Relations with Other Patterns
-- [[Bridge|Bridge]] is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, Adapter is commonly used with an existing app to make some otherwise-incompatible classes work together nicely.
-- Adapter changes the interface of an existing object, while [[Decorator|Decorator]] enhances an object without changing its [[interface|interface]]. In addition, [[Decorator|Decorator]] supports recursive composition, which isn’t possible when you use Adapter.
-- Adapter provides a different interface to the wrapped object, [[Proxy|Proxy]] provides it with the same [[interface|interface]], and [[Decorator|Decorator]] provides it with an enhanced interface.
-- [[Facade|Facade]] defines a new interface for existing objects, whereas Adapter tries to make the existing interface usable. Adapter usually wraps just one object, while [[Facade|Facade]] works with an entire subsystem of objects.
-- [[Bridge|Bridge]], [[State|State]], [[Strategy|Strategy]] (and to some degree Adapter) have very similar structures. Indeed, all of these patterns are based on composition, which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+- [Bridge](Bridge.md) is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, Adapter is commonly used with an existing app to make some otherwise-incompatible classes work together nicely.
+- Adapter changes the interface of an existing object, while [Decorator](Decorator.md) enhances an object without changing its [interface](interface.md). In addition, [Decorator](Decorator.md) supports recursive composition, which isn’t possible when you use Adapter.
+- Adapter provides a different interface to the wrapped object, [Proxy](Proxy.md) provides it with the same [interface](interface.md), and [Decorator](Decorator.md) provides it with an enhanced interface.
+- [Facade](Facade.md) defines a new interface for existing objects, whereas Adapter tries to make the existing interface usable. Adapter usually wraps just one object, while [Facade](Facade.md) works with an entire subsystem of objects.
+- [Bridge](Bridge.md), [State](State.md), [Strategy](Strategy.md) (and to some degree Adapter) have very similar structures. Indeed, all of these patterns are based on composition, which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.

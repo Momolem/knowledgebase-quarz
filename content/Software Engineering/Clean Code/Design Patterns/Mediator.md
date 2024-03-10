@@ -17,13 +17,13 @@ tags:
 ## Problem
 Say you have a dialog for creating and editing customer profiles. It consists of various form controls such as text fields, checkboxes, buttons, etc.
 
-![[37d7a04dad81c2552f0470aacc722961_MD5.png|37d7a04dad81c2552f0470aacc722961_MD5.png]]
+![37d7a04dad81c2552f0470aacc722961_MD5.png](37d7a04dad81c2552f0470aacc722961_MD5.png)
 
 Relations between elements of the user interface can become chaotic as the application evolves.
 
 Some of the form elements may interact with others. For instance, selecting the “I have a dog” checkbox may reveal a hidden text field for entering the dog’s name. Another example is the submit button that has to validate values of all fields before saving the data.
 
-![[a09540232a756f6c331a3aab5ac27a97_MD5.png|a09540232a756f6c331a3aab5ac27a97_MD5.png]]
+![a09540232a756f6c331a3aab5ac27a97_MD5.png](a09540232a756f6c331a3aab5ac27a97_MD5.png)
 
 Elements can have lots of relations with other elements. Hence, changes to some elements may affect the others.
 
@@ -35,7 +35,7 @@ The Mediator pattern suggests that you should cease all direct communication bet
 
 In our example with the profile editing form, the dialog class itself may act as the mediator. Most likely, the dialog class is already aware of all of its sub-elements, so you won’t even need to introduce new dependencies into this class.
 
-![[d4770ce0f346443374185fbc490fc7f3_MD5.png|d4770ce0f346443374185fbc490fc7f3_MD5.png]]
+![d4770ce0f346443374185fbc490fc7f3_MD5.png](d4770ce0f346443374185fbc490fc7f3_MD5.png)
 
 UI elements should communicate indirectly, via the mediator object.
 
@@ -47,7 +47,7 @@ This way, the Mediator pattern lets you encapsulate a complex web of relations b
 
 ##  Real-World Analogy
 
-![[e4731751970db6c14ff3d4430b6a48c7_MD5.png|e4731751970db6c14ff3d4430b6a48c7_MD5.png]]
+![e4731751970db6c14ff3d4430b6a48c7_MD5.png](e4731751970db6c14ff3d4430b6a48c7_MD5.png)
 
 Aircraft pilots don’t talk to each other directly when deciding who gets to land their plane next. All communication goes through the control tower.
 
@@ -57,7 +57,7 @@ The tower doesn’t need to control the whole flight. It exists only to enforce 
 
 ##  Structure
 
-![[984ffe30e8979eeb77dc09ce78003a63_MD5.png|984ffe30e8979eeb77dc09ce78003a63_MD5.png]]
+![984ffe30e8979eeb77dc09ce78003a63_MD5.png](984ffe30e8979eeb77dc09ce78003a63_MD5.png)
 
 1.  **Components** are various classes that contain some business logic. Each component has a reference to a mediator, declared with the type of the mediator interface. The component isn’t aware of the actual class of the mediator, so you can reuse the component in other programs by linking it to a different mediator.
     
@@ -74,7 +74,7 @@ The tower doesn’t need to control the whole flight. It exists only to enforce 
 
 In this example, the **Mediator** pattern helps you eliminate mutual dependencies between various UI classes: buttons, checkboxes and text labels.
 
-![[6796e049e0bc38f591cafcb015221fdb_MD5.png|6796e049e0bc38f591cafcb015221fdb_MD5.png]]
+![6796e049e0bc38f591cafcb015221fdb_MD5.png](6796e049e0bc38f591cafcb015221fdb_MD5.png)
 
 Structure of the UI dialog classes.
 
@@ -181,7 +181,7 @@ class Checkbox extends Component is
     
 3.  Implement the concrete mediator class. Consider storing references to all components inside the mediator. This way, you could call any component from the mediator’s methods.
     
-4.  You can go even further and make the mediator responsible for the creation and destruction of component objects. After this, the mediator may resemble a [[Factory|Factory]] or a [[Facade|Facade]].
+4.  You can go even further and make the mediator responsible for the creation and destruction of component objects. After this, the mediator may resemble a [Factory](Factory.md) or a [Facade](Facade.md).
     
 5.  Components should store a reference to the mediator object. The connection is usually established in the component’s constructor, where a mediator object is passed as an argument.
     
@@ -189,26 +189,26 @@ class Checkbox extends Component is
 ## Pro and  Cons
 | Pros | Cons |
 | --- | --- |
-| [[Single Responsibility Principle|Single Responsibility Principle]]. You can extract the communications between various components into a single place, making it easier to comprehend and maintain. |  Over time a mediator can evolve into a [[God Object|God Object]].
-| [[Open Closed Principle|Open Closed Principle]]. You can introduce new mediators without having to change the actual components. ||
+| [Single Responsibility Principle](Single%20Responsibility%20Principle.md). You can extract the communications between various components into a single place, making it easier to comprehend and maintain. |  Over time a mediator can evolve into a [God Object](God%20Object.md).
+| [Open Closed Principle](Open%20Closed%20Principle.md). You can introduce new mediators without having to change the actual components. ||
 | You can reduce coupling between various components of a program.||
 | You can reuse individual components more easily.||
 
 ## Relations with Other Patterns
-- [[Chain of Responsibility|Chain of Responsibility]], [[Command|Command]], Mediator and [[Observer|Observer]] address various ways of connecting senders and receivers of requests:
-	- [[Chain of Responsibility|Chain of Responsibility]] passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
-	- [[Command|Command]] establishes unidirectional connections between senders and receivers.
+- [Chain of Responsibility](Chain%20of%20Responsibility.md), [Command](Command.md), Mediator and [Observer](Observer.md) address various ways of connecting senders and receivers of requests:
+	- [Chain of Responsibility](Chain%20of%20Responsibility.md) passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
+	- [Command](Command.md) establishes unidirectional connections between senders and receivers.
 	- Mediator eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
-	- [[Observer|Observer]] lets receivers dynamically subscribe to and unsubscribe from receiving requests.
-- [[Facade|Facade]] and Mediator have similar jobs: they try to organize collaboration between lots of tightly coupled classes.
-	- [[Facade|Facade]] defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the [[Facade|Facade]]. Objects within the subsystem can communicate directly.
+	- [Observer](Observer.md) lets receivers dynamically subscribe to and unsubscribe from receiving requests.
+- [Facade](Facade.md) and Mediator have similar jobs: they try to organize collaboration between lots of tightly coupled classes.
+	- [Facade](Facade.md) defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the [Facade](Facade.md). Objects within the subsystem can communicate directly.
 	- Mediator centralizes communication between components of the system. The components only know about the mediator object and don’t communicate directly.
-- The difference between Mediator and [[Observer|Observer]] is often elusive. In most cases, you can implement either of these patterns; but sometimes you can apply both simultaneously. Let’s see how we can do that.
+- The difference between Mediator and [Observer](Observer.md) is often elusive. In most cases, you can implement either of these patterns; but sometimes you can apply both simultaneously. Let’s see how we can do that.
 	
-	The primary goal of Mediator is to eliminate mutual dependencies among a set of system components. Instead, these components become dependent on a single mediator object. The goal of [[Observer|Observer]] is to establish dynamic one-way connections between objects, where some objects act as subordinates of others.
+	The primary goal of Mediator is to eliminate mutual dependencies among a set of system components. Instead, these components become dependent on a single mediator object. The goal of [Observer](Observer.md) is to establish dynamic one-way connections between objects, where some objects act as subordinates of others.
 
-	There’s a popular implementation of the Mediator pattern that relies on [[Observer|Observer]]. The mediator object plays the role of publisher, and the components act as subscribers which subscribe to and unsubscribe from the mediator’s events. When Mediator is implemented this way, it may look very similar to [[Observer|Observer]].
+	There’s a popular implementation of the Mediator pattern that relies on [Observer](Observer.md). The mediator object plays the role of publisher, and the components act as subscribers which subscribe to and unsubscribe from the mediator’s events. When Mediator is implemented this way, it may look very similar to [Observer](Observer.md).
 
-	When you’re confused, remember that you can implement the Mediator pattern in other ways. For example, you can permanently link all the components to the same mediator object. This implementation won’t resemble [[Observer|Observer]] but will still be an instance of the Mediator pattern.
+	When you’re confused, remember that you can implement the Mediator pattern in other ways. For example, you can permanently link all the components to the same mediator object. This implementation won’t resemble [Observer](Observer.md) but will still be an instance of the Mediator pattern.
 
 	Now imagine a program where all components have become publishers, allowing dynamic connections between each other. There won’t be a centralized mediator object, only a distributed set of observers.

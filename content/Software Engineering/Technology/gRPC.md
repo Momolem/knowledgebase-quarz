@@ -8,11 +8,11 @@ share: true
 ## Overview
 In gRPC, a client application can directly call a method on a server application on a different machine as if it were a local object, making it easier for you to create distributed applications and services. As in many RPC systems, gRPC is based around the idea of defining a service, specifying the methods that can be called remotely with their parameters and return types. On the server side, the server implements this interface and runs a gRPC server to handle client calls. On the client side, the client has a stub (referred to as just a client in some languages) that provides the same methods as the server.
 
-![[Software Engineering/Technology/assets/a2f31f741c1ba2d0b11427fa01bcd29c_MD5.png|Software Engineering/Technology/assets/a2f31f741c1ba2d0b11427fa01bcd29c_MD5.png]]
+![a2f31f741c1ba2d0b11427fa01bcd29c_MD5.png](a2f31f741c1ba2d0b11427fa01bcd29c_MD5.png)
 
 
 ## Service definitions
-Like many RPC systems, gRPC is based around the idea of defining a service, specifying the methods that can be called remotely with their parameters and return types. By default, gRPC uses [[Protobuf|Protobuf]] as the Interface Definition Language (IDL) for describing both the service interface and the structure of the payload messages. It is possible to use other alternatives if desired
+Like many RPC systems, gRPC is based around the idea of defining a service, specifying the methods that can be called remotely with their parameters and return types. By default, gRPC uses [Protobuf](Protobuf.md) as the Interface Definition Language (IDL) for describing both the service interface and the structure of the payload messages. It is possible to use other alternatives if desired
 
 ```protobuf
 service HelloService {

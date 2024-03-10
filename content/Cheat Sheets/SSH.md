@@ -130,7 +130,7 @@ Multiple files i.E for multiple Customers
 
 ---
 
-![[assets/bd2f3210eee44a8b121a6ec9a35a1bfa_MD5.png|assets/bd2f3210eee44a8b121a6ec9a35a1bfa_MD5.png]]
+![bd2f3210eee44a8b121a6ec9a35a1bfa_MD5 1.png](bd2f3210eee44a8b121a6ec9a35a1bfa_MD5%201.png)
 
 ### Manual
 
