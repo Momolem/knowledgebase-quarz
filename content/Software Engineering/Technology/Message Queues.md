@@ -19,7 +19,7 @@ In this tutorial, we’ll take a look at how we can leverage message queues to a
 
 Here is a diagram to illustrate the difference between asynchronous and synchronous communication:
 
-[![[Software Engineering/Technology/assets/43a53a330b9d015937e182d9a1aab1ab_MD5.webp|Software Engineering/Technology/assets/43a53a330b9d015937e182d9a1aab1ab_MD5.webp]]](https://www.baeldung.com/wp-content/uploads/sites/4/2023/08/asyncVsSyncCommunication.png)
+[![43a53a330b9d015937e182d9a1aab1ab_MD5.webp](43a53a330b9d015937e182d9a1aab1ab_MD5.webp)](https://www.baeldung.com/wp-content/uploads/sites/4/2023/08/asyncVsSyncCommunication.png)
 
 ## 3. Definition of Message Queues
 We’ll start by understanding the meaning of messages. In the context of a real-world software application, a message represents a piece of information that the application needs to process. This piece of information could be processed by another system or it can be an actual payload, like files or metadata that trigger some processing in another sub-system. Queues help in processing these messages sequentially. **A message queue is like a buffer that receives messages in a specific order and forwards them to the concerned sub-system or application in the same order.**
@@ -51,7 +51,7 @@ The [publisher-subscriber](https://www.baeldung.com/pub-sub-vs-message-queues)�
 
 Here’s a simplified diagram illustrating the publisher-subscriber model:
 
-[![[Software Engineering/Technology/assets/74d0d00d9a54ea1532b48435edd80ad7_MD5.webp|Software Engineering/Technology/assets/74d0d00d9a54ea1532b48435edd80ad7_MD5.webp]]](https://www.baeldung.com/wp-content/uploads/sites/4/2023/08/pub_sub_model.png)
+[![74d0d00d9a54ea1532b48435edd80ad7_MD5.webp](74d0d00d9a54ea1532b48435edd80ad7_MD5.webp)](https://www.baeldung.com/wp-content/uploads/sites/4/2023/08/pub_sub_model.png)
 
 In this diagram, Publisher 1 and Publisher 2 generate messages and publish them to the message queue. The message queue functions as an intermediary and retains the messages until the subscribers consume them. The subscribers (Subscriber 1, Subscriber 2, and Subscriber 3) subscribe to specific topics or channels of interest within the message queue. The message queue then delivers relevant messages to each subscriber based on their subscriptions, guaranteeing they receive only the messages aligned with their interests.
 
