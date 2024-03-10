@@ -2,12 +2,12 @@
 tags:
   - cleancode
 aliases:
-  - CleanCode
-linter-yaml-title-alias: CleanCode
-title: CleanCode
+  - Clean Code
+linter-yaml-title-alias: Clean Code
+title: Clean Code
 share: true
 ---
-
+**
  
 # Clean Code
 Clean Code sind Praktiken, welche die Qualität des Codes durch BestPractices verbessern sollen.
