@@ -19,13 +19,13 @@ Imagine that you’re working on a notification library which lets other program
 
 The initial version of the library was based on the `Notifier` class that had only a few fields, a constructor and a single `send` method. The method could accept a message argument from a client and send the message to a list of emails that were passed to the notifier via its constructor. A third-party app which acted as a client was supposed to create and configure the notifier object once, and then use it each time something important happened.
 
-![[e1ab0a21ec95c34c2d64c819c8e1884c_MD5.png|e1ab0a21ec95c34c2d64c819c8e1884c_MD5.png]]
+![e1ab0a21ec95c34c2d64c819c8e1884c_MD5.png](e1ab0a21ec95c34c2d64c819c8e1884c_MD5.png)
 
 A program could use the notifier class to send notifications about important events to a predefined set of emails.
 
 At some point, you realize that users of the library expect more than just email notifications. Many of them would like to receive an SMS about critical issues. Others would like to be notified on Facebook and, of course, the corporate users would love to get Slack notifications.
 
-![[a05661f95607c98806c8525fddc89169_MD5.png|a05661f95607c98806c8525fddc89169_MD5.png]]
+![a05661f95607c98806c8525fddc89169_MD5.png](a05661f95607c98806c8525fddc89169_MD5.png)
 
 Each notification type is implemented as a notifier’s subclass.
 
@@ -35,7 +35,7 @@ But then someone reasonably asked you, “Why can’t you use several notificati
 
 You tried to address that problem by creating special subclasses which combined several notification methods within one class. However, it quickly became apparent that this approach would bloat the code immensely, not only the library code but the client code as well.
 
-![[a4d7f4908115a1efae71b9bf7316d71c_MD5.png|a4d7f4908115a1efae71b9bf7316d71c_MD5.png]]
+![a4d7f4908115a1efae71b9bf7316d71c_MD5.png](a4d7f4908115a1efae71b9bf7316d71c_MD5.png)
 
 Combinatorial explosion of subclasses.
 
@@ -52,7 +52,7 @@ One of the ways to overcome these caveats is by using _Aggregation_ or _Compo
 
 With this new approach you can easily substitute the linked “helper” object with another, changing the behavior of the container at runtime. An object can use the behavior of various classes, having references to multiple objects and delegating them all kinds of work. Aggregation/composition is the key principle behind many design patterns, including Decorator. On that note, let’s return to the pattern discussion.
 
-![[f097c68ac15359b403a8168543a73547_MD5.png|f097c68ac15359b403a8168543a73547_MD5.png]]
+![f097c68ac15359b403a8168543a73547_MD5.png](f097c68ac15359b403a8168543a73547_MD5.png)
 
 Inheritance vs. Aggregation
 
@@ -62,13 +62,13 @@ When does a simple wrapper become the real decorator? As I mentioned, the wrappe
 
 In our notifications example, let’s leave the simple email notification behavior inside the base `Notifier` class, but turn all other notification methods into decorators.
 
-![[41204c4ebc299edd748e37dffcbb69e0_MD5.png|41204c4ebc299edd748e37dffcbb69e0_MD5.png]]
+![41204c4ebc299edd748e37dffcbb69e0_MD5.png](41204c4ebc299edd748e37dffcbb69e0_MD5.png)
 
 Various notification methods become decorators.
 
 The client code would need to wrap a basic notifier object into a set of decorators that match the client’s preferences. The resulting objects will be structured as a stack.
 
-![[d7649ecd7fb2e673101c5fcc90e80353_MD5.png|d7649ecd7fb2e673101c5fcc90e80353_MD5.png]]
+![d7649ecd7fb2e673101c5fcc90e80353_MD5.png](d7649ecd7fb2e673101c5fcc90e80353_MD5.png)
 
 Apps might configure complex stacks of notification decorators.
 
@@ -78,7 +78,7 @@ We could apply the same approach to other behaviors such as formatting messages 
 
 ##  Real-World Analogy
 
-![[2ff9b5b139efffcf5ab3a02e2d2d9224_MD5.png|2ff9b5b139efffcf5ab3a02e2d2d9224_MD5.png]]
+![2ff9b5b139efffcf5ab3a02e2d2d9224_MD5.png](2ff9b5b139efffcf5ab3a02e2d2d9224_MD5.png)
 
 You get a combined effect from wearing multiple pieces of clothing.
 
@@ -86,7 +86,7 @@ Wearing clothes is an example of using decorators. When you’re cold, you wrap 
 
 ## Structure
 
-![[cff1475e770bc39439afe918b5e27c54_MD5.png|cff1475e770bc39439afe918b5e27c54_MD5.png]]
+![cff1475e770bc39439afe918b5e27c54_MD5.png](cff1475e770bc39439afe918b5e27c54_MD5.png)
 
 1.  The **Component** declares the common interface for both wrappers and wrapped objects.
     
@@ -102,7 +102,7 @@ Wearing clothes is an example of using decorators. When you’re cold, you wrap 
 ##  Pseudocode
 In this example, the **Decorator** pattern lets you compress and encrypt sensitive data independently from the code that actually uses this data.
 
-![[ef7afbe233d76ba5d924911745bee629_MD5.png|ef7afbe233d76ba5d924911745bee629_MD5.png]]
+![ef7afbe233d76ba5d924911745bee629_MD5.png](ef7afbe233d76ba5d924911745bee629_MD5.png)
 
 The encryption and compression decorators example.
 
@@ -257,25 +257,25 @@ class ApplicationConfigurator is
 | You can extend an object’s behavior without making a new subclass. | It’s hard to remove a specific wrapper from the wrappers stack.|
 | You can add or remove responsibilities from an object at runtime. | It’s hard to implement a decorator in such a way that its behavior doesn’t depend on the order in the decorators stack. |
 | You can combine several behaviors by wrapping an object into multiple decorators. | The initial configuration code of layers might look pretty ugly.
-|  [[Single Responsibility Principle|Single Responsibility Principle]]. You can divide a monolithic class that implements many possible variants of behavior into several smaller classes. ||
+|  [Single Responsibility Principle](Single%20Responsibility%20Principle.md). You can divide a monolithic class that implements many possible variants of behavior into several smaller classes. ||
 
 ## Relations with Other Patterns
-[[Adapter|Adapter]] changes the interface of an existing object, while Decorator enhances an object without changing its interface. In addition, Decorator supports recursive composition, which isn’t possible when you use [[Adapter|Adapter]].
+[Adapter](Adapter.md) changes the interface of an existing object, while Decorator enhances an object without changing its interface. In addition, Decorator supports recursive composition, which isn’t possible when you use [Adapter](Adapter.md).
 
-[[Adapter|Adapter]] provides a different interface to the wrapped object, [[Proxy|Proxy]] provides it with the same interface, and Decorator provides it with an enhanced interface.
+[Adapter](Adapter.md) provides a different interface to the wrapped object, [Proxy](Proxy.md) provides it with the same interface, and Decorator provides it with an enhanced interface.
 
-[[Chain of Responsibility|Chain of Responsibility]] and Decorator have very similar class structures. Both patterns rely on recursive composition to pass the execution through a series of objects. However, there are several crucial differences.
+[Chain of Responsibility](Chain%20of%20Responsibility.md) and Decorator have very similar class structures. Both patterns rely on recursive composition to pass the execution through a series of objects. However, there are several crucial differences.
 
-The [[Chain of Responsibility|CoR]] handlers can execute arbitrary operations independently of each other. They can also stop passing the request further at any point. On the other hand, various Decorators can extend the object’s behavior while keeping it consistent with the base interface. In addition, decorators aren’t allowed to break the flow of the request.
+The [CoR](Chain%20of%20Responsibility.md) handlers can execute arbitrary operations independently of each other. They can also stop passing the request further at any point. On the other hand, various Decorators can extend the object’s behavior while keeping it consistent with the base interface. In addition, decorators aren’t allowed to break the flow of the request.
 
-[[Composite|Composite]] and Decorator have similar structure diagrams since both rely on recursive composition to organize an open-ended number of objects.
+[Composite](Composite.md) and Decorator have similar structure diagrams since both rely on recursive composition to organize an open-ended number of objects.
 
-A Decorator is like a [[Composite|Composite]] but only has one child component. There’s another significant difference: Decorator adds additional responsibilities to the wrapped object, while [[Composite|Composite]] just “sums up” its children’s results.
+A Decorator is like a [Composite](Composite.md) but only has one child component. There’s another significant difference: Decorator adds additional responsibilities to the wrapped object, while [Composite](Composite.md) just “sums up” its children’s results.
 
-However, the patterns can also cooperate: you can use Decorator to extend the behavior of a specific object in the [[Composite|Composite]] tree.
+However, the patterns can also cooperate: you can use Decorator to extend the behavior of a specific object in the [Composite](Composite.md) tree.
 
-Designs that make heavy use of [[Composite|Composite]] and Decorator can often benefit from using [[Prototype|Prototype]]. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
+Designs that make heavy use of [Composite](Composite.md) and Decorator can often benefit from using [Prototype](Prototype.md). Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
 
-Decorator lets you change the skin of an object, while [[Strategy|Strategy]] lets you change the guts.
+Decorator lets you change the skin of an object, while [Strategy](Strategy.md) lets you change the guts.
 
-Decorator and [[Proxy|Proxy]] have similar structures, but very different intents. Both patterns are built on the composition principle, where one object is supposed to delegate some of the work to another. The difference is that a [[Proxy|Proxy]] usually manages the life cycle of its service object on its own, whereas the composition of Decorators is always controlled by the client.
+Decorator and [Proxy](Proxy.md) have similar structures, but very different intents. Both patterns are built on the composition principle, where one object is supposed to delegate some of the work to another. The difference is that a [Proxy](Proxy.md) usually manages the life cycle of its service object on its own, whereas the composition of Decorators is always controlled by the client.

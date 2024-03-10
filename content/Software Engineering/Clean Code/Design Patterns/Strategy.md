@@ -13,7 +13,7 @@ tags:
 
 ## Intent
 
-**Strategy** is a [[Design Patterns#Behavioral|behavioral design pattern]] that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+**Strategy** is a [behavioral design pattern](Design%20Patterns.md#Behavioral) that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
 
 ## Problem
 
@@ -25,7 +25,7 @@ The first version of the app could only build the routes over roads. People who 
 
 However, that was only the beginning. Later you planned to add route building for cyclists. And even later, another option for building routes through all of a city’s tourist attractions.
 
-![[2ebaf6edc15a2db946e26eda44c402b6_MD5.png|2ebaf6edc15a2db946e26eda44c402b6_MD5.png]]
+![2ebaf6edc15a2db946e26eda44c402b6_MD5.png](2ebaf6edc15a2db946e26eda44c402b6_MD5.png)
 
 The code of the navigator became bloated.
 
@@ -45,7 +45,7 @@ The context isn’t responsible for selecting an appropriate algorithm for the j
 
 This way the context becomes independent of concrete strategies, so you can add new algorithms or modify existing ones without changing the code of the context or other strategies.
 
-![[d825db2695100d0e2617b24ab5ce60e4_MD5.png|d825db2695100d0e2617b24ab5ce60e4_MD5.png]]
+![d825db2695100d0e2617b24ab5ce60e4_MD5.png](d825db2695100d0e2617b24ab5ce60e4_MD5.png)
 
 Route planning strategies.
 
@@ -55,7 +55,7 @@ Even though given the same arguments, each routing class might build a different
 
 ## Real-World Analogy
 
-![[17451ba8526af91af1711f7f8e93f256_MD5.png|17451ba8526af91af1711f7f8e93f256_MD5.png]]
+![17451ba8526af91af1711f7f8e93f256_MD5.png](17451ba8526af91af1711f7f8e93f256_MD5.png)
 
 Various strategies for getting to the airport.
 
@@ -63,7 +63,7 @@ Imagine that you have to get to the airport. You can catch a bus, order a cab, o
 
 ## Structure
 
-![[6b3c4757eca12a7a9492b316d0696630_MD5.png|6b3c4757eca12a7a9492b316d0696630_MD5.png]]
+![6b3c4757eca12a7a9492b316d0696630_MD5.png](6b3c4757eca12a7a9492b316d0696630_MD5.png)
 
 1.  The **Context** maintains a reference to one of the concrete strategies and communicates with this object only via the strategy interface.
     
@@ -170,13 +170,13 @@ class ExampleApplication is
 | You can swap algorithms used inside an object at runtime. | If you only have a couple of algorithms and they rarely change, there’s no real reason to overcomplicate the program with new classes and interfaces that come along with the pattern. |
 | You can isolate the implementation details of an algorithm from the code that uses it. | Clients must be aware of the differences between strategies to be able to select a proper one. |
 | You can replace inheritance with composition. | A lot of modern programming languages have functional type support that lets you implement different versions of an algorithm inside a set of anonymous functions. Then you could use these functions exactly as you’d have used the strategy objects, but without bloating your code with extra classes and interfaces. |
-| [[Open Closed Principle|Open Closed Principle]]. You can introduce new strategies without having to change the context. | |
+| [Open Closed Principle](Open%20Closed%20Principle.md). You can introduce new strategies without having to change the context. | |
 
 ## Relations with Other Patterns
-- [[Bridge|Bridge]], [[State|State]], [[Strategy|Strategy]] (and to some degree [[Adapter|Adapter]]) have very similar structures. Indeed, all of these patterns are based on [[composition|composition]], which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
-- [[Command|Command]] and [[Strategy|Strategy]] may look similar because you can use both to parameterize an object with some action. However, they have very different intents.
-	- You can use [[Command|Command]] to convert any operation into an object. The operation’s parameters become fields of that object. The conversion lets you defer execution of the operation, queue it, store the history of commands, send commands to remote services, etc.
-	- On the other hand, [[Strategy|Strategy]] usually describes different ways of doing the same thing, letting you swap these algorithms within a single context class.
-- [[Decorator|Decorator]] lets you change the skin of an object, while [[Strategy|Strategy]] lets you change the guts.
-- [[Template Method|Template Method]] is based on inheritance: it lets you alter parts of an algorithm by extending those parts in subclasses. [[Strategy|Strategy]] is based on composition: you can alter parts of the object’s behavior by supplying it with different strategies that correspond to that behavior. Template Method works at the class level, so it’s static. Strategy works on the object level, letting you switch behaviors at runtime.
-- [[State|State]] can be considered as an extension of Strategy. Both patterns are based on [[composition|composition]]: they change the behavior of the context by delegating some work to helper objects. [[Strategy|Strategy]] makes these objects completely independent and unaware of each other. However, [[State|State]] doesn’t restrict dependencies between concrete states, letting them alter the state of the context at will.
+- [Bridge](Bridge.md), [State](State.md), [Strategy](Strategy.md) (and to some degree [Adapter](Adapter.md)) have very similar structures. Indeed, all of these patterns are based on [composition](composition.md), which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+- [Command](Command.md) and [Strategy](Strategy.md) may look similar because you can use both to parameterize an object with some action. However, they have very different intents.
+	- You can use [Command](Command.md) to convert any operation into an object. The operation’s parameters become fields of that object. The conversion lets you defer execution of the operation, queue it, store the history of commands, send commands to remote services, etc.
+	- On the other hand, [Strategy](Strategy.md) usually describes different ways of doing the same thing, letting you swap these algorithms within a single context class.
+- [Decorator](Decorator.md) lets you change the skin of an object, while [Strategy](Strategy.md) lets you change the guts.
+- [Template Method](Template%20Method.md) is based on inheritance: it lets you alter parts of an algorithm by extending those parts in subclasses. [Strategy](Strategy.md) is based on composition: you can alter parts of the object’s behavior by supplying it with different strategies that correspond to that behavior. Template Method works at the class level, so it’s static. Strategy works on the object level, letting you switch behaviors at runtime.
+- [State](State.md) can be considered as an extension of Strategy. Both patterns are based on [composition](composition.md): they change the behavior of the context by delegating some work to helper objects. [Strategy](Strategy.md) makes these objects completely independent and unaware of each other. However, [State](State.md) doesn’t restrict dependencies between concrete states, letting them alter the state of the context at will.

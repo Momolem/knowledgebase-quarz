@@ -18,7 +18,7 @@ Imagine that you’re creating a data mining application that analyzes corporate
 
 The first version of the app could work only with DOC files. In the following version, it was able to support CSV files. A month later, you “taught” it to extract data from PDF files.
 
-![[2419feeb6dfc05c36366e89893828ec0_MD5.png|2419feeb6dfc05c36366e89893828ec0_MD5.png]]
+![2419feeb6dfc05c36366e89893828ec0_MD5.png](2419feeb6dfc05c36366e89893828ec0_MD5.png)
 
 Data mining classes contained a lot of duplicate code.
 
@@ -32,7 +32,7 @@ The Template Method pattern suggests that you break down an algorithm into a ser
 
 Let’s see how this will play out in our data mining app. We can create a base class for all three parsing algorithms. This class defines a template method consisting of a series of calls to various document-processing steps.
 
-![[5a6ae0f538c487d264e7500022506f92_MD5.png|5a6ae0f538c487d264e7500022506f92_MD5.png]]
+![5a6ae0f538c487d264e7500022506f92_MD5.png](5a6ae0f538c487d264e7500022506f92_MD5.png)
 
 Template method breaks the algorithm into steps, allowing subclasses to override these steps but not the actual method.
 
@@ -49,7 +49,7 @@ There’s another type of step, called _hooks_. A hook is an optional step with
 
 ##  Real-World Analogy
 
-![[0c724b1adc9135a4794f512f5b2a7707_MD5.png|0c724b1adc9135a4794f512f5b2a7707_MD5.png]]
+![0c724b1adc9135a4794f512f5b2a7707_MD5.png](0c724b1adc9135a4794f512f5b2a7707_MD5.png)
 
 A typical architectural plan can be slightly altered to better fit the client’s needs.
 
@@ -59,7 +59,7 @@ Each building step, such as laying the foundation, framing, building walls, inst
 
 ##  Structure
 
-![[3b11dc438095a0ec8c8aaad9e739c7a9_MD5.png|3b11dc438095a0ec8c8aaad9e739c7a9_MD5.png]]
+![3b11dc438095a0ec8c8aaad9e739c7a9_MD5.png](3b11dc438095a0ec8c8aaad9e739c7a9_MD5.png)
 
 1.  The **Abstract Class** declares methods that act as steps of an algorithm, as well as the actual template method which calls these methods in a specific order. The steps may either be declared `abstract` or have some default implementation.
     
@@ -70,7 +70,7 @@ Each building step, such as laying the foundation, framing, building walls, inst
 
 In this example, the **Template Method** pattern provides a “skeleton” for various branches of artificial intelligence in a simple strategy video game.
 
-![[1e73530119b17d36fe9ac0aca29abf33_MD5.png|1e73530119b17d36fe9ac0aca29abf33_MD5.png]]
+![1e73530119b17d36fe9ac0aca29abf33_MD5.png](1e73530119b17d36fe9ac0aca29abf33_MD5.png)
 
 AI classes of a simple video game.
 
@@ -170,9 +170,9 @@ class MonstersAI extends GameAI is
 | Pros | Cons |
 | --- | --- |
 | You can let clients override only certain parts of a large algorithm, making them less affected by changes that happen to other parts of the algorithm. |  Some clients may be limited by the provided skeleton of an algorithm.|
-| You can pull the duplicate code into a superclass. | You might violate the [[Liskov Substitution Principle|Liskov Substitution Principle]] by suppressing a default step implementation via a subclass. |
+| You can pull the duplicate code into a superclass. | You might violate the [Liskov Substitution Principle](Liskov%20Substitution%20Principle.md) by suppressing a default step implementation via a subclass. |
 | | Template methods tend to be harder to maintain the more steps they have. |
 
 ## Relations with Other Patterns
-- [[Factory|Factory]] Method is a specialization of Template Method. At the same time, a [[Factory|Factory]] Method may serve as a step in a large Template Method.
-- Template Method is based on inheritance: it lets you alter parts of an algorithm by extending those parts in subclasses. [[Strategy|Strategy]] is based on composition: you can alter parts of the object’s behavior by supplying it with different strategies that correspond to that behavior. Template Method works at the class level, so it’s static. [[Strategy|Strategy]] works on the object level, letting you switch behaviors at runtime.
+- [Factory](Factory.md) Method is a specialization of Template Method. At the same time, a [Factory](Factory.md) Method may serve as a step in a large Template Method.
+- Template Method is based on inheritance: it lets you alter parts of an algorithm by extending those parts in subclasses. [Strategy](Strategy.md) is based on composition: you can alter parts of the object’s behavior by supplying it with different strategies that correspond to that behavior. Template Method works at the class level, so it’s static. [Strategy](Strategy.md) works on the object level, letting you switch behaviors at runtime.

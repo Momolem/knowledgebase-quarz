@@ -10,15 +10,15 @@ weigth: "1"
 
 # Roter Grad
 ## Prinzipien
-- [[DRY|DRY]]
-- [[KISS|KISS]]
-- [[Beware of Premature Optimization|Beware of Premature Optimization]]
-- [[Favour Composition over Inheritance|Favour Composition over Inheritance]]
-- [[Integration Operation Segregation Principle (IOSP)|Integration Operation Segregation Principle (IOSP)]]
+- [DRY](DRY.md)
+- [KISS](KISS.md)
+- [Beware of Premature Optimization](Beware%20of%20Premature%20Optimization.md)
+- [Favour Composition over Inheritance](Favour%20Composition%20over%20Inheritance.md)
+- [Integration Operation Segregation Principle (IOSP)](Integration%20Operation%20Segregation%20Principle%20(IOSP).md)
 
 ## Praktiken
-- [[Boy Scout Rule|Boy Scout Rule]]
-- [[Root Cause Analysis|Root Cause Analysis]]
-- [[Version Control System|Version Control System]]
-- [[Simple Refactorings|Simple Refactorings]]
-- [[Daily Reflection|Daily Reflection]]
+- [Boy Scout Rule](Boy%20Scout%20Rule.md)
+- [Root Cause Analysis](Root%20Cause%20Analysis.md)
+- [Version Control System](Version%20Control%20System.md)
+- [Simple Refactorings](Simple%20Refactorings.md)
+- [Daily Reflection](Daily%20Reflection.md)

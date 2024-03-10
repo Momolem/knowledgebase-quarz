@@ -12,12 +12,12 @@ This far I managed to include some notes on the topics CleanCode, UI & UX and Co
 I want to expand these topics with everything I know
 
 ## Clean Code
-[[Clean Code|CleanCode]]
-- [[Clean Code Developer|Clean Code Developer]]
-- [[Design Patterns|Design Patterns]]
+[CleanCode](Clean%20Code.md)
+- [Clean Code Developer](Clean%20Code%20Developer.md)
+- [Design Patterns](Design%20Patterns.md)
 
 ## UI & UX
-[[Design Patterns|Entwurfsmuster]]
+[Entwurfsmuster](Design%20Patterns.md)
 
 ## Cooking
-[[Das mit den Bohnen|Das mit den Bohnen]]
+[Das mit den Bohnen](Das%20mit%20den%20Bohnen.md)

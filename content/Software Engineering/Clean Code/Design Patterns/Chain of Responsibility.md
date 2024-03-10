@@ -13,14 +13,14 @@ tags:
 # Chain of Responsibility
 
 ## Intent
-**Chain of Responsibility** is a [[Design Patterns#Behavioral|behavioral design pattern]] that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
+**Chain of Responsibility** is a [behavioral design pattern](Design%20Patterns.md#Behavioral) that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
 
 ## Problem
 Imagine that you’re working on an online ordering system. You want to restrict access to the system so only authenticated users can create orders. Also, users who have administrative permissions must have full access to all orders.
 
 After a bit of planning, you realized that these checks must be performed sequentially. The application can attempt to authenticate a user to the system whenever it receives a request that contains the user’s credentials. However, if those credentials aren’t correct and authentication fails, there’s no reason to proceed with any other checks.
 
-![[92943ed742e01c52282ec8320c88ff70_MD5.png|92943ed742e01c52282ec8320c88ff70_MD5.png]]
+![92943ed742e01c52282ec8320c88ff70_MD5.png](92943ed742e01c52282ec8320c88ff70_MD5.png)
 
 The request must pass a series of checks before the ordering system itself can handle it.
 
@@ -33,7 +33,7 @@ During the next few months, you implemented several more of those sequential che
 -   Someone else suggested that you could speed up the system by returning cached results on repeated requests containing the same data. Hence, you added another check which lets the request pass through to the system only if there’s no suitable cached response.
     
 
-![[9bba06693c87b5a0214d1f87f8358e06_MD5.png|9bba06693c87b5a0214d1f87f8358e06_MD5.png]]
+![9bba06693c87b5a0214d1f87f8358e06_MD5.png](9bba06693c87b5a0214d1f87f8358e06_MD5.png)
 
 The bigger the code grew, the messier it became.
 
@@ -50,7 +50,7 @@ Here’s the best part: a handler can decide not to pass the request further dow
 
 In our example with ordering systems, a handler performs the processing and then decides whether to pass the request further down the chain. Assuming the request contains the right data, all the handlers can execute their primary behavior, whether it’s authentication checks or caching.
 
-![[0e2750a3ecb87cd5511cf009bc58f78b_MD5.png|0e2750a3ecb87cd5511cf009bc58f78b_MD5.png]]
+![0e2750a3ecb87cd5511cf009bc58f78b_MD5.png](0e2750a3ecb87cd5511cf009bc58f78b_MD5.png)
 
 Handlers are lined up one by one, forming a chain.
 
@@ -58,14 +58,14 @@ However, there’s a slightly different approach (and it’s a bit more canonica
 
 For instance, when a user clicks a button, the event propagates through the chain of GUI elements that starts with the button, goes along its containers (like forms or panels), and ends up with the main application window. The event is processed by the first element in the chain that’s capable of handling it. This example is also noteworthy because it shows that a chain can always be extracted from an object tree.
 
-![[45ba31b57ec8751bab5497aca7e79fdd_MD5.png|45ba31b57ec8751bab5497aca7e79fdd_MD5.png]]
+![45ba31b57ec8751bab5497aca7e79fdd_MD5.png](45ba31b57ec8751bab5497aca7e79fdd_MD5.png)
 
 A chain can be formed from a branch of an object tree.
 
 It’s crucial that all handler classes implement the same interface. Each concrete handler should only care about the following one having the `execute` method. This way you can compose chains at runtime, using various handlers without coupling your code to their concrete classes.
 
 ## Real-World Analogy
-![[846af96f2f368de62d67c34c1143cee3_MD5.png|846af96f2f368de62d67c34c1143cee3_MD5.png]]
+![846af96f2f368de62d67c34c1143cee3_MD5.png](846af96f2f368de62d67c34c1143cee3_MD5.png)
 
 A call to tech support can go through multiple operators.
 
@@ -79,7 +79,7 @@ Eventually, the operator passes your call to one of the engineers, who had proba
 
 ## Structure
 
-![[047a2d50d7e3851bad99234307e10901_MD5.png|047a2d50d7e3851bad99234307e10901_MD5.png]]
+![047a2d50d7e3851bad99234307e10901_MD5.png](047a2d50d7e3851bad99234307e10901_MD5.png)
 
 1.  The **Handler** declares the interface, common for all concrete handlers. It usually contains just a single method for handling requests, but sometimes it may also have another method for setting the next handler on the chain.
 2.  The **Base Handler** is an optional class where you can put the boilerplate code that’s common to all handler classes.
@@ -93,7 +93,7 @@ Eventually, the operator passes your call to one of the engineers, who had proba
 ## Pseudocode
 In this example, the **Chain of Responsibility** pattern is responsible for displaying contextual help information for active GUI elements.
 
-![[925f4fcd13e6138af2040bfacb70c869_MD5.png|925f4fcd13e6138af2040bfacb70c869_MD5.png]]
+![925f4fcd13e6138af2040bfacb70c869_MD5.png](925f4fcd13e6138af2040bfacb70c869_MD5.png)
 
 The GUI classes are built with the Composite pattern. Each element is linked to its container element. At any point, you can build a chain of elements that starts with the element itself and goes through all of its container elements.
 
@@ -101,7 +101,7 @@ The application’s GUI is usually structured as an object tree. For example, th
 
 A simple component can show brief contextual tooltips, as long as the component has some help text assigned. But more complex components define their own way of showing contextual help, such as showing an excerpt from the manual or opening a page in a browser.
 
-![[56092c19281007b94e1716bc9d85bf1e_MD5.png|56092c19281007b94e1716bc9d85bf1e_MD5.png]]
+![56092c19281007b94e1716bc9d85bf1e_MD5.png](56092c19281007b94e1716bc9d85bf1e_MD5.png)
 
 That’s how a help request traverses GUI objects.
 
@@ -226,19 +226,19 @@ class Application is
 | Pros | Cons |
 | --- | --- |
 |You can control the order of request handling. | Some requests may end up unhandled. |
-| [[Single Responsibility Principle|Single Responsibility Principle]]. You can decouple classes that invoke operations from classes that perform operations. | |
-| [[Open Closed Principle|Open Closed Principle]]. You can introduce new handlers into the app without breaking the existing client code. ||
+| [Single Responsibility Principle](Single%20Responsibility%20Principle.md). You can decouple classes that invoke operations from classes that perform operations. | |
+| [Open Closed Principle](Open%20Closed%20Principle.md). You can introduce new handlers into the app without breaking the existing client code. ||
 
 ## Relations with Other Patterns
-- [[Chain of Responsibility|Chain of Responsibility]], [[Command|Command]], [[Mediator|Mediator]] and [[Observer|Observer]] address various ways of connecting senders and receivers of requests:
-	- [[Chain of Responsibility|Chain of Responsibility]] passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
-	- [[Command|Command]] establishes unidirectional connections between senders and receivers.
-	- [[Mediator|Mediator]] eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
-	- [[Observer|Observer]] lets receivers dynamically subscribe to and unsubscribe from receiving requests.
-- [[Chain of Responsibility|Chain of Responsibility]] is often used in conjunction with [[Composite|Composite]]. In this case, when a leaf component gets a request, it may pass it through the chain of all of the parent components down to the root of the object tree.
-- Handlers in [[Chain of Responsibility|Chain of Responsibility]] can be implemented as [[Command|Commands]]. In this case, you can execute a lot of different operations over the same context object, represented by a request.
+- [Chain of Responsibility](Chain%20of%20Responsibility.md), [Command](Command.md), [Mediator](Mediator.md) and [Observer](Observer.md) address various ways of connecting senders and receivers of requests:
+	- [Chain of Responsibility](Chain%20of%20Responsibility.md) passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
+	- [Command](Command.md) establishes unidirectional connections between senders and receivers.
+	- [Mediator](Mediator.md) eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
+	- [Observer](Observer.md) lets receivers dynamically subscribe to and unsubscribe from receiving requests.
+- [Chain of Responsibility](Chain%20of%20Responsibility.md) is often used in conjunction with [Composite](Composite.md). In this case, when a leaf component gets a request, it may pass it through the chain of all of the parent components down to the root of the object tree.
+- Handlers in [Chain of Responsibility](Chain%20of%20Responsibility.md) can be implemented as [Commands](Command.md). In this case, you can execute a lot of different operations over the same context object, represented by a request.
 	
 	However, there’s another approach, where the request itself is a Command object. In this case, you can execute the same operation in a series of different contexts linked into a chain.
-- [[Chain of Responsibility|Chain of Responsibility]] and [[Decorator|Decorator]] have very similar class structures. Both patterns rely on recursive composition to pass the execution through a series of objects. However, there are several crucial differences.
+- [Chain of Responsibility](Chain%20of%20Responsibility.md) and [Decorator](Decorator.md) have very similar class structures. Both patterns rely on recursive composition to pass the execution through a series of objects. However, there are several crucial differences.
 	
-	The [[Chain of Responsibility|CoR]] handlers can execute arbitrary operations independently of each other. They can also stop passing the request further at any point. On the other hand, various Decorators can extend the object’s behavior while keeping it consistent with the base interface. In addition, decorators aren’t allowed to break the flow of the request.
+	The [CoR](Chain%20of%20Responsibility.md) handlers can execute arbitrary operations independently of each other. They can also stop passing the request further at any point. On the other hand, various Decorators can extend the object’s behavior while keeping it consistent with the base interface. In addition, decorators aren’t allowed to break the flow of the request.

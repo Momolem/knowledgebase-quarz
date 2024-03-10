@@ -16,7 +16,7 @@ tags:
 ## Problem
 Imagine that your team develops an app which works with geographic information structured as one colossal graph. Each node of the graph may represent a complex entity such as a city, but also more granular things like industries, sightseeing areas, etc. The nodes are connected with others if there’s a road between the real objects that they represent. Under the hood, each node type is represented by its own class, while each specific node is an object.
 
-![[4dd2d9dee19bef1d6488f57584c12c8d_MD5.png|4dd2d9dee19bef1d6488f57584c12c8d_MD5.png]]
+![4dd2d9dee19bef1d6488f57584c12c8d_MD5.png](4dd2d9dee19bef1d6488f57584c12c8d_MD5.png)
 
 Exporting the graph into XML.
 
@@ -24,7 +24,7 @@ At some point, you got a task to implement exporting the graph into XML format. 
 
 Unfortunately, the system architect refused to allow you to alter existing node classes. He said that the code was already in production and he didn’t want to risk breaking it because of a potential bug in your changes.
 
-![[c17a91b327c6f5f1cc19a2d6c55c894a_MD5.png|c17a91b327c6f5f1cc19a2d6c55c894a_MD5.png]]
+![c17a91b327c6f5f1cc19a2d6c55c894a_MD5.png](c17a91b327c6f5f1cc19a2d6c55c894a_MD5.png)
 
 The XML export method had to be added into all node classes, which bore the risk of breaking the whole application if any bugs slipped through along with the change.
 
@@ -87,7 +87,7 @@ Now, if we extract a common interface for all visitors, all existing nodes can w
 
 ##  Real-World Analogy
 
-![[ca16d3e775deb5ef8950297c08068d41_MD5.png|ca16d3e775deb5ef8950297c08068d41_MD5.png]]
+![ca16d3e775deb5ef8950297c08068d41_MD5.png](ca16d3e775deb5ef8950297c08068d41_MD5.png)
 
 A good insurance agent is always ready to offer different policies to various types of organizations.
 
@@ -99,7 +99,7 @@ Imagine a seasoned insurance agent who’s eager to get new customers. He can vi
 
 ##  Structure
 
-![[195f83f749d134d2a5ac576c416fa1a7_MD5.png|195f83f749d134d2a5ac576c416fa1a7_MD5.png]]
+![195f83f749d134d2a5ac576c416fa1a7_MD5.png](195f83f749d134d2a5ac576c416fa1a7_MD5.png)
 
 1.  The **Visitor** interface declares a set of visiting methods that can take concrete elements of an object structure as arguments. These methods may have the same names if the program is written in a language that supports overloading, but the type of their parameters must be different.
     
@@ -116,7 +116,7 @@ Imagine a seasoned insurance agent who’s eager to get new customers. He can vi
 
 In this example, the **Visitor** pattern adds XML export support to the class hierarchy of geometric shapes.
 
-![[dbff8d099b193c8afc9477a0301187bf_MD5.png|dbff8d099b193c8afc9477a0301187bf_MD5.png]]
+![dbff8d099b193c8afc9477a0301187bf_MD5.png](dbff8d099b193c8afc9477a0301187bf_MD5.png)
 
 Exporting various types of objects into XML format via a visitor object.
 
@@ -206,7 +206,7 @@ class Application is
 
 If you wonder why we need the `accept` method in this example, my article [Visitor and Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch) addresses this question in detail.
 ##  Applicability
-- **Use the Visitor when you need to perform an operation on all elements of a complex object structure (for example, an [[Composite|object tree]]).**
+- **Use the Visitor when you need to perform an operation on all elements of a complex object structure (for example, an [object tree](Composite.md)).**
 	The Visitor pattern lets you execute an operation over a set of objects with different classes by having a visitor object implement several variants of the same operation, which correspond to all target classes.
 - **Use the Visitor to clean up the business logic of auxiliary behaviors.**
 	The pattern lets you make the primary classes of your app more focused on their main jobs by extracting all other behaviors into a set of visitor classes.
@@ -231,11 +231,11 @@ If you wonder why we need the `accept` method in this example, my article [Vi
 ## Pro and  Cons
 | Pros | Cons |
 | --- | --- |
-| _[[Open Closed Principle|Open Closed Principle]]_. You can introduce a new behavior that can work with objects of different classes without changing these classes. | You need to update all visitors each time a class gets added to or removed from the element hierarchy. |
-| _[[Single Responsibility Principle|Single Responsibility Principle]]_. You can move multiple versions of the same behavior into the same class. | Visitors might lack the necessary access to the private fields and methods of the elements that they’re supposed to work with. |
-| A visitor object can accumulate some useful information while working with various objects. This might be handy when you want to traverse some complex object structure, such as an [[Composite|object tree]], and apply the visitor to each object of this structure. ||
+| _[Open Closed Principle](Open%20Closed%20Principle.md)_. You can introduce a new behavior that can work with objects of different classes without changing these classes. | You need to update all visitors each time a class gets added to or removed from the element hierarchy. |
+| _[Single Responsibility Principle](Single%20Responsibility%20Principle.md)_. You can move multiple versions of the same behavior into the same class. | Visitors might lack the necessary access to the private fields and methods of the elements that they’re supposed to work with. |
+| A visitor object can accumulate some useful information while working with various objects. This might be handy when you want to traverse some complex object structure, such as an [object tree](Composite.md), and apply the visitor to each object of this structure. ||
 
 ## Relations with Other Patterns
-- You can treat Visitor as a powerful version of the [[Command|Command]] pattern. Its objects can execute operations over various objects of different classes.
-- You can use Visitor to execute an operation over an entire [[Composite|Composite]] tree.
-- You can use Visitor along with [[Iterator|Iterator]] to traverse a complex data structure and execute some operation over its elements, even if they all have different classes.
+- You can treat Visitor as a powerful version of the [Command](Command.md) pattern. Its objects can execute operations over various objects of different classes.
+- You can use Visitor to execute an operation over an entire [Composite](Composite.md) tree.
+- You can use Visitor along with [Iterator](Iterator.md) to traverse a complex data structure and execute some operation over its elements, even if they all have different classes.

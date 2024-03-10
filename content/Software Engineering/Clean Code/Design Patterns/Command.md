@@ -18,19 +18,19 @@ tags:
 ## Problem
 Imagine that you’re working on a new text-editor app. Your current task is to create a toolbar with a bunch of buttons for various operations of the editor. You created a very neat `Button` class that can be used for buttons on the toolbar, as well as for generic buttons in various dialogs.
 
-![[6be91e4ca8df69a2f86c73509f4df1c9_MD5.png|6be91e4ca8df69a2f86c73509f4df1c9_MD5.png]]
+![6be91e4ca8df69a2f86c73509f4df1c9_MD5.png](6be91e4ca8df69a2f86c73509f4df1c9_MD5.png)
 
 All buttons of the app are derived from the same class.
 
 While all of these buttons look similar, they’re all supposed to do different things. Where would you put the code for the various click handlers of these buttons? The simplest solution is to create tons of subclasses for each place where the button is used. These subclasses would contain the code that would have to be executed on a button click.
 
-![[8f188040e25525247695573cf5f8e3e1_MD5.png|8f188040e25525247695573cf5f8e3e1_MD5.png]]
+![8f188040e25525247695573cf5f8e3e1_MD5.png](8f188040e25525247695573cf5f8e3e1_MD5.png)
 
 Lots of button subclasses. What can go wrong?
 
 Before long, you realize that this approach is deeply flawed. First, you have an enormous number of subclasses, and that would be okay if you weren’t risking breaking the code in these subclasses each time you modify the base `Button` class. Put simply, your GUI code has become awkwardly dependent on the volatile code of the business logic.
 
-![[8bd6880db4562c6bcaeca63cdf30f76a_MD5.png|8bd6880db4562c6bcaeca63cdf30f76a_MD5.png]]
+![8bd6880db4562c6bcaeca63cdf30f76a_MD5.png](8bd6880db4562c6bcaeca63cdf30f76a_MD5.png)
 
 Several classes implement the same functionality.
 
@@ -39,11 +39,11 @@ And here’s the ugliest part. Some operations, such as copying/pasting text, wo
 Initially, when our app only had the toolbar, it was okay to place the implementation of various operations into the button subclasses. In other words, having the code for copying text inside the `CopyButton` subclass was fine. But then, when you implement context menus, shortcuts, and other stuff, you have to either duplicate the operation’s code in many classes or make menus dependent on buttons, which is an even worse option.
 
 ## Solution
-Good software design is often based on the _principle of [[Separation of Concerns|Separation of Concerns]]_, which usually results in breaking an app into layers. The most common example: a layer for the graphical user interface and another layer for the business logic. The GUI layer is responsible for rendering a beautiful picture on the screen, capturing any input and showing results of what the user and the app are doing. However, when it comes to doing something important, like calculating the trajectory of the moon or composing an annual report, the GUI layer delegates the work to the underlying layer of business logic.
+Good software design is often based on the _principle of [Separation of Concerns](Separation%20of%20Concerns.md)_, which usually results in breaking an app into layers. The most common example: a layer for the graphical user interface and another layer for the business logic. The GUI layer is responsible for rendering a beautiful picture on the screen, capturing any input and showing results of what the user and the app are doing. However, when it comes to doing something important, like calculating the trajectory of the moon or composing an annual report, the GUI layer delegates the work to the underlying layer of business logic.
 
 In the code it might look like this: a GUI object calls a method of a business logic object, passing it some arguments. This process is usually described as one object sending another a _request_.
 
-![[d2e4e36515fd1b5a290531ccb08a562f_MD5.png|d2e4e36515fd1b5a290531ccb08a562f_MD5.png]]
+![d2e4e36515fd1b5a290531ccb08a562f_MD5.png](d2e4e36515fd1b5a290531ccb08a562f_MD5.png)
 
 The GUI objects may access the business logic objects directly.
 
@@ -51,7 +51,7 @@ The Command pattern suggests that GUI objects shouldn’t send these requests di
 
 Command objects serve as links between various GUI and business logic objects. From now on, the GUI object doesn’t need to know what business logic object will receive the request and how it’ll be processed. The GUI object just triggers the command, which handles all the details.
 
-![[49fb0c3a58905a1b12f21fcc31bef9d1_MD5.png|49fb0c3a58905a1b12f21fcc31bef9d1_MD5.png]]
+![49fb0c3a58905a1b12f21fcc31bef9d1_MD5.png](49fb0c3a58905a1b12f21fcc31bef9d1_MD5.png)
 
 Accessing the business logic layer via a command.
 
@@ -59,7 +59,7 @@ The next step is to make your commands implement the same interface. Usually it 
 
 You might have noticed one missing piece of the puzzle, which is the request parameters. A GUI object might have supplied the business-layer object with some parameters. Since the command execution method doesn’t have any parameters, how would we pass the request details to the receiver? It turns out the command should be either pre-configured with this data, or capable of getting it on its own.
 
-![[208d404f7379dda22dff5e7ee04eadad_MD5.png|208d404f7379dda22dff5e7ee04eadad_MD5.png]]
+![208d404f7379dda22dff5e7ee04eadad_MD5.png](208d404f7379dda22dff5e7ee04eadad_MD5.png)
 
 The GUI objects delegate the work to commands.
 
@@ -72,7 +72,7 @@ Other GUI elements, such as menus, shortcuts or entire dialogs, can be implement
 As a result, commands become a convenient middle layer that reduces coupling between the GUI and business logic layers. And that’s only a fraction of the benefits that the Command pattern can offer!
 
 ## Real-World Analogy
-![[13b0ccd66c1cce1590314d60b8ee4633_MD5.png|13b0ccd66c1cce1590314d60b8ee4633_MD5.png]]
+![13b0ccd66c1cce1590314d60b8ee4633_MD5.png](13b0ccd66c1cce1590314d60b8ee4633_MD5.png)
 
 Making an order in a restaurant.
 
@@ -83,7 +83,7 @@ The paper order serves as a command. It remains in a queue until the chef is rea
 
 ## Structure
 
-![[3f932360fc4f944296ce6d3265f123df_MD5.png|3f932360fc4f944296ce6d3265f123df_MD5.png]]
+![3f932360fc4f944296ce6d3265f123df_MD5.png](3f932360fc4f944296ce6d3265f123df_MD5.png)
 
 1.  The **Sender** class (aka _invoker_) is responsible for initiating requests. This class must have a field for storing a reference to a command object. The sender triggers that command instead of sending the request directly to the receiver. Note that the sender isn’t responsible for creating the command object. Usually, it gets a pre-created command from the client via the constructor.
 2.  The **Command** interface usually declares just a single method for executing the command.
@@ -94,11 +94,11 @@ The paper order serves as a command. It remains in a queue until the chef is rea
 ## Pseudocode
 In this example, the **Command** pattern helps to track the history of executed operations and makes it possible to revert an operation if needed.
 
-![[4c0498dd403cd4352b116f1abd52ddd9_MD5.png|4c0498dd403cd4352b116f1abd52ddd9_MD5.png]]
+![4c0498dd403cd4352b116f1abd52ddd9_MD5.png](4c0498dd403cd4352b116f1abd52ddd9_MD5.png)
 
 Undoable operations in a text editor.
 
-Commands which result in changing the [[State|State]] of the editor (e.g., cutting and pasting) make a backup copy of the editor’s state before executing an operation associated with the command. After a command is executed, it’s placed into the command history (a stack of command objects) along with the backup copy of the editor’s state at that point. Later, if the user needs to revert an operation, the app can take the most recent command from the history, read the associated backup of the editor’s state, and restore it.
+Commands which result in changing the [State](State.md) of the editor (e.g., cutting and pasting) make a backup copy of the editor’s state before executing an operation associated with the command. After a command is executed, it’s placed into the command history (a stack of command objects) along with the backup copy of the editor’s state at that point. Later, if the user needs to revert an operation, the app can take the most recent command from the history, read the associated backup of the editor’s state, and restore it.
 
 The client code (GUI elements, command history, etc.) isn’t coupled to concrete command classes because it works with commands via the command interface. This approach lets you introduce new commands into the app without breaking any existing code.
 
@@ -249,7 +249,7 @@ class Application is
 	
 	To be able to revert operations, you need to implement the history of performed operations. The command history is a stack that contains all executed command objects along with related backups of the application’s state.
 	
-	This method has two drawbacks. First, it isn’t that easy to save an application’s state because some of it can be private. This problem can be mitigated with the [[Memento|Memento]] pattern.
+	This method has two drawbacks. First, it isn’t that easy to save an application’s state because some of it can be private. This problem can be mitigated with the [Memento](Memento.md) pattern.
 	
 	Second, the state backups may consume quite a lot of RAM. Therefore, sometimes you can resort to an alternative implementation: instead of restoring the past state, the command performs the inverse operation. The reverse operation also has a price: it may turn out to be hard or even impossible to implement.
 
@@ -266,27 +266,27 @@ class Application is
 ## Pro and  Cons
 | Pros | Cons |
 | --- | --- |
-| [[Single Responsibility Principle|Single Responsibility Principle]]. You can decouple classes that invoke operations from classes that perform these operations. |The code may become more complicated since you’re introducing a whole new layer between senders and receivers.|
-| [[Open Closed Principle|Open Closed Principle]]. You can introduce new commands into the app without breaking existing client code. ||
+| [Single Responsibility Principle](Single%20Responsibility%20Principle.md). You can decouple classes that invoke operations from classes that perform these operations. |The code may become more complicated since you’re introducing a whole new layer between senders and receivers.|
+| [Open Closed Principle](Open%20Closed%20Principle.md). You can introduce new commands into the app without breaking existing client code. ||
 | You can implement undo/redo. ||
 | You can implement deferred execution of operations. ||
 | You can assemble a set of simple commands into a complex one.||
 
 
 ## Relations with Other Patterns
-- [[Chain of Responsibility|Chain of Responsibility]], [[Command|Command]], [[Mediator|Mediator]] and [[Observer|Observer]] address various ways of connecting senders and receivers of requests:
-	- [[Chain of Responsibility|Chain of Responsibility]] passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
-	- [[Command|Command]] establishes unidirectional connections between senders and receivers.
-	- [[Mediator|Mediator]] eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a [[Mediator|Mediator]] object.
-	- [[Observer|Observer]] lets receivers dynamically subscribe to and unsubscribe from receiving requests.
-- Handlers in [[Chain of Responsibility|Chain of Responsibility]] can be implemented as [[Command|Commands]]. In this case, you can execute a lot of different operations over the same context object, represented by a request.
+- [Chain of Responsibility](Chain%20of%20Responsibility.md), [Command](Command.md), [Mediator](Mediator.md) and [Observer](Observer.md) address various ways of connecting senders and receivers of requests:
+	- [Chain of Responsibility](Chain%20of%20Responsibility.md) passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
+	- [Command](Command.md) establishes unidirectional connections between senders and receivers.
+	- [Mediator](Mediator.md) eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a [Mediator](Mediator.md) object.
+	- [Observer](Observer.md) lets receivers dynamically subscribe to and unsubscribe from receiving requests.
+- Handlers in [Chain of Responsibility](Chain%20of%20Responsibility.md) can be implemented as [Commands](Command.md). In this case, you can execute a lot of different operations over the same context object, represented by a request.
 	
-	However, there’s another approach, where the request itself is a [[Command|Command]] object. In this case, you can execute the same operation in a series of different contexts linked into a chain.
+	However, there’s another approach, where the request itself is a [Command](Command.md) object. In this case, you can execute the same operation in a series of different contexts linked into a chain.
 
-- You can use [[Command|Command]] and [[Memento|Memento]] together when implementing “undo”. In this case, commands are responsible for performing various operations over a target object, while mementos save the state of that object just before a command gets executed.
+- You can use [Command](Command.md) and [Memento](Memento.md) together when implementing “undo”. In this case, commands are responsible for performing various operations over a target object, while mementos save the state of that object just before a command gets executed.
 
-- [[Command|Command]] and [[Strategy|Strategy]] may look similar because you can use both to parameterize an object with some action. However, they have very different intents.
-	- You can use [[Command|Command]] to convert any operation into an object. The operation’s parameters become fields of that object. The conversion lets you defer execution of the operation, queue it, store the history of commands, send commands to remote services, etc.
-	- On the other hand, [[Strategy|Strategy]] usually describes different ways of doing the same thing, letting you swap these algorithms within a single context class.
-- [[Prototype|Prototype]] can help when you need to save copies of Commands into history.
-- You can treat Visitor as a powerful version of the [[Command|Command]] pattern. Its objects can execute operations over various objects of different classes.
+- [Command](Command.md) and [Strategy](Strategy.md) may look similar because you can use both to parameterize an object with some action. However, they have very different intents.
+	- You can use [Command](Command.md) to convert any operation into an object. The operation’s parameters become fields of that object. The conversion lets you defer execution of the operation, queue it, store the history of commands, send commands to remote services, etc.
+	- On the other hand, [Strategy](Strategy.md) usually describes different ways of doing the same thing, letting you swap these algorithms within a single context class.
+- [Prototype](Prototype.md) can help when you need to save copies of Commands into history.
+- You can treat Visitor as a powerful version of the [Command](Command.md) pattern. Its objects can execute operations over various objects of different classes.
