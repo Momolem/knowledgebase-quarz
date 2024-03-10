@@ -21,13 +21,13 @@ Imagine that you’re creating a furniture shop simulator. Your code consists of
 2.  Several variants of this family. For example, products `Chair` + `Sofa` + `CoffeeTable` are available in these variants: `Modern`, `Victorian`, `ArtDeco`.
     
 
-![[8a4378e4cf2f833c94e1e90067832fcc_MD5.png|8a4378e4cf2f833c94e1e90067832fcc_MD5.png]]
+![8a4378e4cf2f833c94e1e90067832fcc_MD5.png](8a4378e4cf2f833c94e1e90067832fcc_MD5.png)
 
 Product families and their variants.
 
 You need a way to create individual furniture objects so that they match other objects of the same family. Customers get quite mad when they receive non-matching furniture.
 
-![[73b51cfa8075f198cf3a64015f5e747e_MD5.png|73b51cfa8075f198cf3a64015f5e747e_MD5.png]]
+![73b51cfa8075f198cf3a64015f5e747e_MD5.png](73b51cfa8075f198cf3a64015f5e747e_MD5.png)
 
 A Modern-style sofa doesn’t match Victorian-style chairs.
 
@@ -36,13 +36,13 @@ Also, you don’t want to change existing code when adding new products or famil
 ## Solution
 The first thing the Abstract Factory pattern suggests is to explicitly declare interfaces for each distinct product of the product family (e.g., chair, sofa or coffee table). Then you can make all variants of products follow those interfaces. For example, all chair variants can implement the `Chair` interface; all coffee table variants can implement the `CoffeeTable` interface, and so on.
 
-![[549830025baac80914b2fa9228ac0085_MD5.png|549830025baac80914b2fa9228ac0085_MD5.png]]
+![549830025baac80914b2fa9228ac0085_MD5.png](549830025baac80914b2fa9228ac0085_MD5.png)
 
 All variants of the same object must be moved to a single class hierarchy.
 
 The next move is to declare the _Abstract Factory_—an interface with a list of creation methods for all products that are part of the product family (for example, `createChair`, `createSofa` and `createCoffeeTable`). These methods must return **abstract** product types represented by the interfaces we extracted previously: `Chair`, `Sofa`, `CoffeeTable` and so on.
 
-![[44f564e7a1de75b79c898a9c501f0f03_MD5.png|44f564e7a1de75b79c898a9c501f0f03_MD5.png]]
+![44f564e7a1de75b79c898a9c501f0f03_MD5.png](44f564e7a1de75b79c898a9c501f0f03_MD5.png)
 
 Each concrete factory corresponds to a specific product variant.
 
@@ -50,7 +50,7 @@ Now, how about the product variants? For each variant of a product family, we cr
 
 The client code has to work with both factories and products via their respective abstract interfaces. This lets you change the type of a factory that you pass to the client code, as well as the product variant that the client code receives, without breaking the actual client code.
 
-![[216de96f15a665aa3b0a2c189895bbbc_MD5.png|216de96f15a665aa3b0a2c189895bbbc_MD5.png]]
+![216de96f15a665aa3b0a2c189895bbbc_MD5.png](216de96f15a665aa3b0a2c189895bbbc_MD5.png)
 
 The client shouldn’t care about the concrete class of the factory it works with.
 
@@ -59,7 +59,7 @@ Say the client wants a factory to produce a chair. The client doesn’t have to 
 There’s one more thing left to clarify: if the client is only exposed to the abstract interfaces, what creates the actual factory objects? Usually, the application creates a concrete factory object at the initialization stage. Just before that, the app must select the factory type depending on the configuration or the environment settings.
 
 ## Structure
-![[e25e788271f5731f07c09fdbfd661d23_MD5.png|e25e788271f5731f07c09fdbfd661d23_MD5.png]]
+![e25e788271f5731f07c09fdbfd661d23_MD5.png](e25e788271f5731f07c09fdbfd661d23_MD5.png)
 
 1.  **Abstract Products** declare interfaces for a set of distinct but related products which make up a product family.
     
@@ -74,7 +74,7 @@ There’s one more thing left to clarify: if the client is only exposed to the a
 ## Pseudocode
 This example illustrates how the **Abstract Factory** pattern can be used for creating cross-platform UI elements without coupling the client code to concrete UI classes, while keeping all created elements consistent with a selected operating system.
 
-![[b48fa76ffdb01e187480c73d937720cf_MD5.png|b48fa76ffdb01e187480c73d937720cf_MD5.png]]
+![b48fa76ffdb01e187480c73d937720cf_MD5.png](b48fa76ffdb01e187480c73d937720cf_MD5.png)
 
 The cross-platform UI classes example.
 
@@ -182,7 +182,7 @@ class ApplicationConfigurator is
 ## Applicability
 - **Use the Abstract Factory when your code needs to work with various families of related products, but you don’t want it to depend on the concrete classes of those products—they might be unknown beforehand or you simply want to allow for future extensibility.**
 	The Abstract Factory provides you with an interface for creating objects from each class of the product family. As long as your code creates objects via this interface, you don’t have to worry about creating the wrong variant of a product which doesn’t match the products already created by your app.
-	- Consider implementing the Abstract Factory when you have a class with a set of [[Factory|Factory]] that blur its primary responsibility.
+	- Consider implementing the Abstract Factory when you have a class with a set of [Factory](Factory.md) that blur its primary responsibility.
 	- In a well-designed program _each class is responsible only for one thing_. When a class deals with multiple product types, it may be worth extracting its factory methods into a stand-alone factory class or a full-blown Abstract Factory implementation.
 
 ## How to Implement
@@ -198,13 +198,13 @@ class ApplicationConfigurator is
 | --- | --- |
 | You can be sure that the products you’re getting from a factory are compatible with each other. | The code may become more complicated than it should be, since a lot of new interfaces and classes are introduced along with the pattern. |
 | You avoid tight coupling between concrete products and client code. | |
-| _[[Single Responsibility Principle|Single Responsibility Principle]]_. You can extract the product creation code into one place, making the code easier to support. ||
-| _[[Open Closed Principle|Open Closed Principle]]_. You can introduce new variants of products without breaking existing client code.|| 
+| _[Single Responsibility Principle](Single%20Responsibility%20Principle.md)_. You can extract the product creation code into one place, making the code easier to support. ||
+| _[Open Closed Principle](Open%20Closed%20Principle.md)_. You can introduce new variants of products without breaking existing client code.|| 
 
 ## Relations with Other Patterns
-- Many designs start by using [[Factory|Factory]] Method (less complicated and more customizable via subclasses) and evolve toward [[Abstract Factory|Abstract Factory]], [[Prototype|Prototype]], or [[Builder|Builder]] (more flexible, but more complicated).
-- [[Builder|Builder]] focuses on constructing complex objects step by step. [[Abstract Factory|Abstract Factory]] specializes in creating families of related objects. [[Abstract Factory|Abstract Factory]] returns the product immediately, whereas [[Builder|Builder]] lets you run some additional construction steps before fetching the product.
-- [[Abstract Factory|Abstract Factory]] classes are often based on a set of [[Factory|Factory]] Methods, but you can also use [[Prototype|Prototype]] to compose the methods on these classes.
-- [[Abstract Factory|Abstract Factory]] can serve as an alternative to [[Facade|Facade]] when you only want to hide the way the subsystem objects are created from the client code.
-- You can use [[Abstract Factory|Abstract Factory]] along with [[Bridge|Bridge]]. This pairing is useful when some abstractions defined by [[Bridge|Bridge]] can only work with specific implementations. In this case, [[Abstract Factory|Abstract Factory]] can encapsulate these relations and hide the complexity from the client code.
-- [[Abstract Factory|Abstract Factory]], [[Builder|Builder]] and [[Prototype|Prototype]] can all be implemented as [[Singleton|Singleton]].
+- Many designs start by using [Factory](Factory.md) Method (less complicated and more customizable via subclasses) and evolve toward [Abstract Factory](Abstract%20Factory.md), [Prototype](Prototype.md), or [Builder](Builder.md) (more flexible, but more complicated).
+- [Builder](Builder.md) focuses on constructing complex objects step by step. [Abstract Factory](Abstract%20Factory.md) specializes in creating families of related objects. [Abstract Factory](Abstract%20Factory.md) returns the product immediately, whereas [Builder](Builder.md) lets you run some additional construction steps before fetching the product.
+- [Abstract Factory](Abstract%20Factory.md) classes are often based on a set of [Factory](Factory.md) Methods, but you can also use [Prototype](Prototype.md) to compose the methods on these classes.
+- [Abstract Factory](Abstract%20Factory.md) can serve as an alternative to [Facade](Facade.md) when you only want to hide the way the subsystem objects are created from the client code.
+- You can use [Abstract Factory](Abstract%20Factory.md) along with [Bridge](Bridge.md). This pairing is useful when some abstractions defined by [Bridge](Bridge.md) can only work with specific implementations. In this case, [Abstract Factory](Abstract%20Factory.md) can encapsulate these relations and hide the complexity from the client code.
+- [Abstract Factory](Abstract%20Factory.md), [Builder](Builder.md) and [Prototype](Prototype.md) can all be implemented as [Singleton](Singleton.md).
