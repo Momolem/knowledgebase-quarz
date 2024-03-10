@@ -28,7 +28,7 @@ For instance, an app that uploads short funny videos with cats to social media c
 
 ##  Real-World Analogy
 
-![[de0352aab8526989fc0a4dfb1311120d_MD5.png|de0352aab8526989fc0a4dfb1311120d_MD5.png]]
+![de0352aab8526989fc0a4dfb1311120d_MD5.png](de0352aab8526989fc0a4dfb1311120d_MD5.png)
 
 Placing orders by phone.
 
@@ -36,7 +36,7 @@ When you call a shop to place a phone order, an operator is your facade to all s
 
 ##  Structure
 
-![[f2622a3d35c2aa6a833ec4d092fbcd16_MD5.png|f2622a3d35c2aa6a833ec4d092fbcd16_MD5.png]]
+![f2622a3d35c2aa6a833ec4d092fbcd16_MD5.png](f2622a3d35c2aa6a833ec4d092fbcd16_MD5.png)
 
 1.  The **Facade** provides convenient access to a particular part of the subsystem’s functionality. It knows where to direct the client’s request and how to operate all the moving parts.
 2.  An **Additional Facade** class can be created to prevent polluting a single facade with unrelated features that might make it yet another complex structure. Additional facades can be used by both clients and other facades.
@@ -48,7 +48,7 @@ When you call a shop to place a phone order, an operator is your facade to all s
 
 In this example, the **Facade** pattern simplifies interaction with a complex video conversion framework.
 
-![[4a1ae2c00ed039a2099090875e025824_MD5.png|4a1ae2c00ed039a2099090875e025824_MD5.png]]
+![4a1ae2c00ed039a2099090875e025824_MD5.png](4a1ae2c00ed039a2099090875e025824_MD5.png)
 
 An example of isolating multiple dependencies within a single facade class.
 
@@ -109,13 +109,13 @@ class Application is
 - **Use the Facade when you want to structure a subsystem into layers.**
 	Create facades to define entry points to each level of a subsystem. You can reduce coupling between multiple subsystems by requiring them to communicate only through facades.
 	
-	For example, let’s return to our video conversion framework. It can be broken down into two layers: video- and audio-related. For each layer, you can create a facade and then make the classes of each layer communicate with each another via those facades. This approach looks very similar to the [[Mediator|Mediator]] pattern.
+	For example, let’s return to our video conversion framework. It can be broken down into two layers: video- and audio-related. For each layer, you can create a facade and then make the classes of each layer communicate with each another via those facades. This approach looks very similar to the [Mediator](Mediator.md) pattern.
 
 ## How to Implement
 1.  Check whether it’s possible to provide a simpler interface than what an existing subsystem already provides. You’re on the right track if this interface makes the client code independent from many of the subsystem’s classes.
 2.  Declare and implement this interface in a new facade class. The facade should redirect the calls from the client code to appropriate objects of the subsystem. The facade should be responsible for initializing the subsystem and managing its further life cycle unless the client code already does this.
 3.  To get the full benefit from the pattern, make all the client code communicate with the subsystem only via the facade. Now the client code is protected from any changes in the subsystem code. For example, when a subsystem gets upgraded to a new version, you will only need to modify the code in the facade.
-4.  If the facade becomes [[Large Class|Large Class]], consider extracting part of its behavior to a new, refined facade class.
+4.  If the facade becomes [Large Class](Large%20Class.md), consider extracting part of its behavior to a new, refined facade class.
 
 ## Pro and  Cons
 | Pros | Cons |
@@ -123,11 +123,11 @@ class Application is
 | You can isolate your code from the complexity of a subsystem. | A facade can become a god object coupled to all classes of an app. |
 
 ## Relations with Other Patterns
-- [[Facade|Facade]] defines a new interface for existing objects, whereas [[Adapter|Adapter]] tries to make the existing interface usable. Adapter usually wraps just one object, while Facade works with an entire subsystem of objects.
-- [[Abstract Factory|Abstract Factory]]can serve as an alternative to [[Facade|Facade]] when you only want to hide the way the subsystem objects are created from the client code.
-- [[Flyweight|Flyweight]] shows how to make lots of little objects, whereas [[Facade|Facade]] shows how to make a single object that represents an entire subsystem.
-- [[Facade|Facade]] and [[Mediator|Mediator]] have similar jobs: they try to organize collaboration between lots of tightly coupled classes.
-	- [[Facade|Facade]] defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the facade. Objects within the subsystem can communicate directly.
-	- [[Mediator|Mediator]] centralizes communication between components of the system. The components only know about the mediator object and don’t communicate directly.
-- A [[Facade|Facade]] class can often be transformed into a [[Singleton|Singleton]] since a single facade object is sufficient in most cases.
-- [[Facade|Facade]] is similar to [[Proxy|Proxy]] in that both buffer a complex entity and initialize it on its own. Unlike [[Facade|Facade]], [[Proxy|Proxy]] has the same interface as its service object, which makes them interchangeable.
+- [Facade](Facade.md) defines a new interface for existing objects, whereas [Adapter](Adapter.md) tries to make the existing interface usable. Adapter usually wraps just one object, while Facade works with an entire subsystem of objects.
+- [Abstract Factory](Abstract%20Factory.md)can serve as an alternative to [Facade](Facade.md) when you only want to hide the way the subsystem objects are created from the client code.
+- [Flyweight](Flyweight.md) shows how to make lots of little objects, whereas [Facade](Facade.md) shows how to make a single object that represents an entire subsystem.
+- [Facade](Facade.md) and [Mediator](Mediator.md) have similar jobs: they try to organize collaboration between lots of tightly coupled classes.
+	- [Facade](Facade.md) defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the facade. Objects within the subsystem can communicate directly.
+	- [Mediator](Mediator.md) centralizes communication between components of the system. The components only know about the mediator object and don’t communicate directly.
+- A [Facade](Facade.md) class can often be transformed into a [Singleton](Singleton.md) since a single facade object is sufficient in most cases.
+- [Facade](Facade.md) is similar to [Proxy](Proxy.md) in that both buffer a complex entity and initialize it on its own. Unlike [Facade](Facade.md), [Proxy](Proxy.md) has the same interface as its service object, which makes them interchangeable.
