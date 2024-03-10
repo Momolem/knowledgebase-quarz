@@ -8,10 +8,10 @@ title: Singleton
 
 # Singleton
 ## Intent
-**Singleton** is a [[Design Patterns#Creational|creational design pattern]] that lets you ensure that a class has **only one instance**, while providing a global access point to this instance.
+**Singleton** is a [creational design pattern](Design%20Patterns.md#Creational) that lets you ensure that a class has **only one instance**, while providing a global access point to this instance.
 
 ## Problem
-The Singleton pattern solves two problems at the same time, violating the _[[Single Responsibility Principle|Single Responsibility Principle]]_:
+The Singleton pattern solves two problems at the same time, violating the _[Single Responsibility Principle](Single%20Responsibility%20Principle.md)_:
 
 1.  **Ensure that a class has just a single instance**. Why would anyone want to control how many instances a class has? The most common reason for this is to control access to some shared resource—for example, a database or a file.
     
@@ -20,7 +20,7 @@ The Singleton pattern solves two problems at the same time, violating the _[[Si
     Note that this behavior is impossible to implement with a regular constructor since a constructor call **must** always return a new object by design.
     
 
-![[2c4e230c7684846d0fbda90ffa22a4f2_MD5.png|2c4e230c7684846d0fbda90ffa22a4f2_MD5.png]]
+![2c4e230c7684846d0fbda90ffa22a4f2_MD5.png](2c4e230c7684846d0fbda90ffa22a4f2_MD5.png)
 
 Clients may not even realize that they’re working with the same object all the time.
 
@@ -45,7 +45,7 @@ If your code has access to the Singleton class, then it’s able to call the Sin
 The government is an excellent example of the Singleton pattern. A country can have only one official government. Regardless of the personal identities of the individuals who form governments, the title, “The Government of X”, is a global point of access that identifies the group of people in charge.
 
 ## Structure
-![[d910100bc125f7da193e0893da65cd24_MD5.png|d910100bc125f7da193e0893da65cd24_MD5.png]]
+![d910100bc125f7da193e0893da65cd24_MD5.png](d910100bc125f7da193e0893da65cd24_MD5.png)
 
 ## Pseudocode
 
@@ -118,17 +118,17 @@ class Application is
 ## Pro and  Cons
 | Pros | Cons |
 | --- | --- |
-| You can be sure that a class has only a single instance. | Violates the _[[Single Responsibility Principle|Single Responsibility Principle]]_. The pattern solves two problems at the time. |
+| You can be sure that a class has only a single instance. | Violates the _[Single Responsibility Principle](Single%20Responsibility%20Principle.md)_. The pattern solves two problems at the time. |
 | You gain a global access point to that instance. |  The Singleton pattern can mask bad design, for instance, when the components of the program know too much about each other. |
 | The singleton object is initialized only when it’s requested for the first time. |  The Singleton pattern can mask bad design, for instance, when the components of the program know too much about each other. |
 | | The Singleton pattern can mask bad design, for instance, when the components of the program know too much about each other. |
 | | The pattern requires special treatment in a multithreaded environment so that multiple threads won’t create a singleton object several times. |
-| | It may be difficult to [[Unit Test|Unit Test]] the client code of the Singleton because many test frameworks rely on inheritance when producing mock objects. Since the constructor of the singleton class is private and overriding static methods is impossible in most languages, you will need to think of a creative way to mock the singleton. Or just don’t write the tests. Or don’t use the Singleton pattern. |
+| | It may be difficult to [Unit Test](Unit%20Test.md) the client code of the Singleton because many test frameworks rely on inheritance when producing mock objects. Since the constructor of the singleton class is private and overriding static methods is impossible in most languages, you will need to think of a creative way to mock the singleton. Or just don’t write the tests. Or don’t use the Singleton pattern. |
 
 ## Relationship with Other Patterns
--   A [[Facade|Facade]] class can often be transformed into a [[Singleton|Singleton]] since a single facade object is sufficient in most cases.
+-   A [Facade](Facade.md) class can often be transformed into a [Singleton](Singleton.md) since a single facade object is sufficient in most cases.
     
--   [[Flyweight|Flyweight]] would resemble [[Singleton|Singleton]] if you somehow managed to reduce all shared states of the objects to just one flyweight object. But there are two fundamental differences between these patterns:
-    1.  There should be only one Singleton instance, whereas a _[[Flyweight|Flyweight]]_ class can have multiple instances with different intrinsic states.
-    2.  The _Singleton_ object can be mutable. [[Flyweight|Flyweight]] objects are immutable.
--   [[Abstract Factory|Abstract Factory]], [[Builder|Builder]] and [[Prototype|Prototype]] can all be implemented as [[Singleton|Singleton]].
+-   [Flyweight](Flyweight.md) would resemble [Singleton](Singleton.md) if you somehow managed to reduce all shared states of the objects to just one flyweight object. But there are two fundamental differences between these patterns:
+    1.  There should be only one Singleton instance, whereas a _[Flyweight](Flyweight.md)_ class can have multiple instances with different intrinsic states.
+    2.  The _Singleton_ object can be mutable. [Flyweight](Flyweight.md) objects are immutable.
+-   [Abstract Factory](Abstract%20Factory.md), [Builder](Builder.md) and [Prototype](Prototype.md) can all be implemented as [Singleton](Singleton.md).
