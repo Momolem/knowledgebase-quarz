@@ -20,7 +20,7 @@ For example, imagine that you have two types of objects: `Products` and `Boxe
 
 Say you decide to create an ordering system that uses these classes. Orders could contain simple products without any wrapping, as well as boxes stuffed with products...and other boxes. How would you determine the total price of such an order?
 
-![[511e164c2ffccef644f7499c67428cb1_MD5.png|511e164c2ffccef644f7499c67428cb1_MD5.png]]
+![511e164c2ffccef644f7499c67428cb1_MD5.png](511e164c2ffccef644f7499c67428cb1_MD5.png)
 
 An order might comprise various products, packaged in boxes, which are packaged in bigger boxes and so on. The whole structure looks like an upside down tree.
 
@@ -32,7 +32,7 @@ The Composite pattern suggests that you work with `Products` and `Boxes` thr
 
 How would this method work? For a product, it’d simply return the product’s price. For a box, it’d go over each item the box contains, ask its price and then return a total for this box. If one of these items were a smaller box, that box would also start going over its contents and so on, until the prices of all inner components were calculated. A box could even add some extra cost to the final price, such as packaging cost.
 
-![[39d85a34dc78d1735829c620b444f34c_MD5.png|39d85a34dc78d1735829c620b444f34c_MD5.png]]
+![39d85a34dc78d1735829c620b444f34c_MD5.png](39d85a34dc78d1735829c620b444f34c_MD5.png)
 
 The Composite pattern lets you run a behavior recursively over all components of an object tree.
 
@@ -40,14 +40,14 @@ The greatest benefit of this approach is that you don’t need to care about the
 
 ##  Real-World Analogy
 
-![[4b2f8cbeac37cb06be23efbece83aa0a_MD5.png|4b2f8cbeac37cb06be23efbece83aa0a_MD5.png]]
+![4b2f8cbeac37cb06be23efbece83aa0a_MD5.png](4b2f8cbeac37cb06be23efbece83aa0a_MD5.png)
 
 An example of a military structure.
 
 Armies of most countries are structured as hierarchies. An army consists of several divisions; a division is a set of brigades, and a brigade consists of platoons, which can be broken down into squads. Finally, a squad is a small group of real soldiers. Orders are given at the top of the hierarchy and passed down onto each level until every soldier knows what needs to be done.
 ## Structure
 
-![[500239be31244276d46675ba2e6af6ae_MD5.png|500239be31244276d46675ba2e6af6ae_MD5.png]]
+![500239be31244276d46675ba2e6af6ae_MD5.png](500239be31244276d46675ba2e6af6ae_MD5.png)
 
 1.  The **Component** interface describes operations that are common to both simple and complex elements of the tree.
 2.  The **Leaf** is a basic element of a tree that doesn’t have sub-elements.
@@ -61,7 +61,7 @@ Armies of most countries are structured as hierarchies. An army consists of seve
 ##  Pseudocode
 In this example, the **Composite** pattern lets you implement stacking of geometric shapes in a graphical editor.
 
-![[b876525703433d12ae882dc574a89c97_MD5.png|b876525703433d12ae882dc574a89c97_MD5.png]]
+![b876525703433d12ae882dc574a89c97_MD5.png](b876525703433d12ae882dc574a89c97_MD5.png)
 
 The geometric shapes editor example.
 
@@ -171,23 +171,23 @@ class ImageEditor is
     While implementing the methods of the component interface, remember that a container is supposed to be delegating most of the work to sub-elements.
 5. Finally, define the methods for adding and removal of child elements in the container.
     
-   Keep in mind that these operations can be declared in the component interface. This would violate the _[[Interface Segragation Principle|Interface Segragation Principle]]_ because the methods will be empty in the leaf class. However, the client will be able to treat all the elements equally, even when composing the tree.
+   Keep in mind that these operations can be declared in the component interface. This would violate the _[Interface Segragation Principle](Interface%20Segragation%20Principle.md)_ because the methods will be empty in the leaf class. However, the client will be able to treat all the elements equally, even when composing the tree.
 
 ## Pro and  Cons
 | Pros | Cons |
 | --- | --- |
 | You can work with complex tree structures more conveniently: use polymorphism and recursion to your advantage. |   It might be difficult to provide a common interface for classes whose functionality differs too much. In certain scenarios, you’d need to overgeneralize the component interface, making it harder to comprehend. |
-| _[[Open Closed Principle|Open Closed Principle]]_. You can introduce new element types into the app without breaking the existing code, which now works with the object tree. ||
+| _[Open Closed Principle](Open%20Closed%20Principle.md)_. You can introduce new element types into the app without breaking the existing code, which now works with the object tree. ||
 
 ## Relations with Other Patterns
-- You can use [[Builder|Builder]] when creating complex Composite trees because you can program its construction steps to work recursively.
-- [[Chain of Responsibility|Chain of Responsibility]] is often used in conjunction with Composite. In this case, when a leaf component gets a request, it may pass it through the chain of all of the parent components down to the root of the object tree.
-- You can use [[Iterator|Iterators]] to traverse Composite trees.
-- You can use [[Visitor|Visitor]] to execute an operation over an entire Composite tree.
-- You can implement shared leaf nodes of the Composite tree as [[Flyweight|Flyweights]] to save some RAM.
-- Composite and [[Decorator|Decorator]] have similar structure diagrams since both rely on recursive composition to organize an open-ended number of objects.
+- You can use [Builder](Builder.md) when creating complex Composite trees because you can program its construction steps to work recursively.
+- [Chain of Responsibility](Chain%20of%20Responsibility.md) is often used in conjunction with Composite. In this case, when a leaf component gets a request, it may pass it through the chain of all of the parent components down to the root of the object tree.
+- You can use [Iterators](Iterator.md) to traverse Composite trees.
+- You can use [Visitor](Visitor.md) to execute an operation over an entire Composite tree.
+- You can implement shared leaf nodes of the Composite tree as [Flyweights](Flyweight.md) to save some RAM.
+- Composite and [Decorator](Decorator.md) have similar structure diagrams since both rely on recursive composition to organize an open-ended number of objects.
 
-	A [[Decorator|Decorator]] is like a Composite but only has one child component. There’s another significant difference: [[Decorator|Decorator]] adds additional responsibilities to the wrapped object, while Composite just “sums up” its children’s results.
+	A [Decorator](Decorator.md) is like a Composite but only has one child component. There’s another significant difference: [Decorator](Decorator.md) adds additional responsibilities to the wrapped object, while Composite just “sums up” its children’s results.
 	
-	However, the patterns can also cooperate: you can use [[Decorator|Decorator]] to extend the behavior of a specific object in the Composite tree.
-- Designs that make heavy use of Composite and [[Decorator|Decorator]] can often benefit from using [[Prototype|Prototype]]. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
+	However, the patterns can also cooperate: you can use [Decorator](Decorator.md) to extend the behavior of a specific object in the Composite tree.
+- Designs that make heavy use of Composite and [Decorator](Decorator.md) can often benefit from using [Prototype](Prototype.md). Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
