@@ -19,7 +19,7 @@ Say you have an object, and you want to create an exact copy of it. How would yo
 
 Nice! But there’s a catch. Not all objects can be copied that way because some of the object’s fields may be private and not visible from outside of the object itself.
 
-![[2fd329ca6f0195ecab862df9f49bfe2f_MD5.png|2fd329ca6f0195ecab862df9f49bfe2f_MD5.png]]
+![2fd329ca6f0195ecab862df9f49bfe2f_MD5.png](2fd329ca6f0195ecab862df9f49bfe2f_MD5.png)
 
 Copying an object “from the outside” [isn’t](https://refactoring.guru/cargo-cult) always possible.
 
@@ -32,7 +32,7 @@ The implementation of the `clone` method is very similar in all classes. The m
 
 An object that supports cloning is called a _prototype_. When your objects have dozens of fields and hundreds of possible configurations, cloning them might serve as an alternative to subclassing.
 
-![[83531eee738022cad23adaa39487c5e8_MD5.png|83531eee738022cad23adaa39487c5e8_MD5.png]]
+![83531eee738022cad23adaa39487c5e8_MD5.png](83531eee738022cad23adaa39487c5e8_MD5.png)
 
 Pre-built prototypes can be an alternative to subclassing.
 
@@ -41,7 +41,7 @@ Here’s how it works: you create a set of objects, configured in various ways. 
 ## Real-World Analogy
 In real life, prototypes are used for performing various tests before starting mass production of a product. However, in this case, prototypes don’t participate in any actual production, playing a passive role instead.
 
-![[a7c7ab73eddd146c9d595601e332806c_MD5.png|a7c7ab73eddd146c9d595601e332806c_MD5.png]]
+![a7c7ab73eddd146c9d595601e332806c_MD5.png](a7c7ab73eddd146c9d595601e332806c_MD5.png)
 
 The division of a cell.
 
@@ -50,7 +50,7 @@ Since industrial prototypes don’t really copy themselves, a much closer analog
 ## Structure
 #### Basic implementation
 
-![[eade1d87a653edde279ecf4e66b6bb7c_MD5.png|eade1d87a653edde279ecf4e66b6bb7c_MD5.png]]
+![eade1d87a653edde279ecf4e66b6bb7c_MD5.png](eade1d87a653edde279ecf4e66b6bb7c_MD5.png)
 
 1.  The **Prototype** interface declares the cloning methods. In most cases, it’s a single `clone` method.
 2.  The **Concrete Prototype** class implements the cloning method. In addition to copying the original object’s data to the clone, this method may also handle some edge cases of the cloning process related to cloning linked objects, untangling recursive dependencies, etc.
@@ -58,14 +58,14 @@ Since industrial prototypes don’t really copy themselves, a much closer analog
 
 #### Prototype registry implementation
 
-![[1314b78c0ded31766c14c1d1771aaa0f_MD5.png|1314b78c0ded31766c14c1d1771aaa0f_MD5.png]]
+![1314b78c0ded31766c14c1d1771aaa0f_MD5.png](1314b78c0ded31766c14c1d1771aaa0f_MD5.png)
 
 1.  The **Prototype Registry** provides an easy way to access frequently-used prototypes. It stores a set of pre-built objects that are ready to be copied. The simplest prototype registry is a `name → prototype` hash map. However, if you need better search criteria than a simple name, you can build a much more robust version of the registry.
 
 ## Pseudocode
 In this example, the **Prototype** pattern lets you produce exact copies of geometric objects, without coupling the code to their classes.
 
-![[bc038ddd096195838fef7eda93d3075a_MD5.png|bc038ddd096195838fef7eda93d3075a_MD5.png]]
+![bc038ddd096195838fef7eda93d3075a_MD5.png](bc038ddd096195838fef7eda93d3075a_MD5.png)
 
 Cloning a set of objects that belong to a class hierarchy.
 
@@ -196,10 +196,10 @@ class Application is
 | You get an alternative to inheritance when dealing with configuration presets for complex objects.||
 
 ## Relations with Other Patterns
-- Many designs start by using [[Factory|Factory]] Method (less complicated and more customizable via subclasses) and evolve toward [[Abstract Factory|Abstract Factory]], Prototype, or [[Builder|Builder]] (more flexible, but more complicated).
-- Abstract [[Factory|Factory]] classes are often based on a set of [[Factory|Factory]] Methods, but you can also use Prototype to compose the methods on these classes.
+- Many designs start by using [Factory](Factory.md) Method (less complicated and more customizable via subclasses) and evolve toward [Abstract Factory](Abstract%20Factory.md), Prototype, or [Builder](Builder.md) (more flexible, but more complicated).
+- Abstract [Factory](Factory.md) classes are often based on a set of [Factory](Factory.md) Methods, but you can also use Prototype to compose the methods on these classes.
 - Prototype can help when you need to save copies of Commands into history.
 - Designs that make heavy use of Composite and Decorator can often benefit from using Prototype. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
-- Prototype isn’t based on inheritance, so it doesn’t have its drawbacks. On the other hand, Prototype requires a complicated initialization of the cloned object. [[Factory|Factory]] Method is based on inheritance but doesn’t require an initialization step.
+- Prototype isn’t based on inheritance, so it doesn’t have its drawbacks. On the other hand, Prototype requires a complicated initialization of the cloned object. [Factory](Factory.md) Method is based on inheritance but doesn’t require an initialization step.
 - Sometimes Prototype can be a simpler alternative to Memento. This works if the object, the state of which you want to store in the history, is fairly straightforward and doesn’t have links to external resources, or the links are easy to re-establish.
-- [[Abstract Factory|Abstract Factory]], [[Builder|Builders]] and [[Prototype|Prototype]] can all be implemented as [[Singleton|Singleton]].
+- [Abstract Factory](Abstract%20Factory.md), [Builders](Builder.md) and [Prototype](Prototype.md) can all be implemented as [Singleton](Singleton.md).
