@@ -2,4 +2,4 @@
 share: true
 title: Interaktive Systeme
 ---
-- [[Entwurfsprinzipien|Entwurfsprinzipien]]
+- [Entwurfsprinzipien](Entwurfsprinzipien.md)
